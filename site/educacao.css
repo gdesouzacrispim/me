@@ -1,0 +1,88 @@
+/* Customizações básicas */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #1f2020;
+}
+
+h1, h2, h5 {
+    font-weight: 600;
+}
+
+p {
+    color: wheat;
+}
+
+/* Header */
+header {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/educacao.webp') no-repeat center center/cover;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Cards de portfólio */
+.portfolio-educacao .card {
+    transition: all 0.3s ease-in-out;
+    border-radius: 15px;
+    max-width: 100%;  /* Certifica-se de que o card nunca ultrapasse 100% do contêiner */
+    min-height: 350px; /* Define uma altura mínima para uniformizar os cartões */
+}
+
+.portfolio-educacao .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 20px rgba(240, 236, 236, 0.1);
+}
+
+.portfolio-educacao .card-img-top {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    width: 100%;              /* Define a largura da imagem para preencher o contêiner */
+    max-width: 350px;        /* Limita a largura máxima a 350px */
+    height: 250px;           /* Define uma altura fixa para uniformizar os cartões */
+    object-fit: cover;       /* Garante que a imagem se ajuste sem distorções */
+    margin: 0 auto;          /* Centraliza a imagem se o card for maior que a imagem */
+}
+.card-body {
+    display: flex;
+    flex-direction: column; /* Para que o conteúdo seja exibido em coluna */
+    justify-content: space-between; /* Distribui o espaço uniformemente */
+    height: calc(100% - 250px); /* Ajusta a altura do corpo do cartão considerando a altura da imagem */
+}
+
+.card-text {
+    color: black;
+    margin-top: auto; /* Garante que o texto fique na parte inferior do cartão */
+}
+
+/* Footer */
+footer {
+    background-color: #343a40;
+}
+
+/* Ícone do WhatsApp */
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25d366; 
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.7; 
+    transition: opacity 0.3s ease;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+    background-color: wheat;
+    text-decoration: none;
+}
