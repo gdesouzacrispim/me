@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Design</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="stylesheet" href="design.html">
+        <link rel="stylesheet" href="modal/modal.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    </head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Gustavo de Souza Crispim</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#servicos">Serviços</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#portfolio">Portfólio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#sobre">Sobre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#contato">Contato</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <a href="https://wa.me/5547992072150?text=Olá%2C%20vim%20do%20seu%20website%20e%20gostaria%20de%20mais%20informações" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <header class="bg-dark text-white text-center py-5">
+        <h1 class="display-4">Design</h1>
+        <p class="lead">Conheça meus projetos profissionais e pessoais na área de Design</p>
+    </header>
+
+    
+    <section class="portfolio-educacao py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Projetos de Design</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card shadow-sm border-0">
+                        <img src="img/construindo.png" class="card-img-top" alt="TOTVS Fluig">
+                        <div class="card-body">
+                            <h5 class="card-title">...</h5>
+                            <p class="card-text">Cartões de visita, logomarcas, banners, posts para instagram, stories personalizados</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+        <div class="modal" id="modal1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Trabalhos acadêmicos realizados</h5>
+                        <button type="button" class="close" onclick="closeModal('modal1')">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td><strong>Descrição:</strong></td>
+                                    <td>DOCKER: Estudo comparativo de consumo de memória e processamento de uma aplicação sob estresse sendo executada em um servidor local com e sem docker</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Ano:</strong></td>
+                                    <td>2023</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Link:</strong></td>
+                                    <td>
+                                        <a href="https://drive.google.com/file/d/1MNfT_K0XXQduNo4O0zxOr4W-4OKXJRkb/view" target="_blank" class="btn btn-outline-primary">
+                                            <i class="fas fa-download"></i> Download
+                                        </a>
+                                        <a href="https://github.com/gdesouzacrispim/microsservices-sop" target="_blank" class="btn btn-outline-secondary ms-2">
+                                            <i class="fab fa-github"></i> GitHub
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                            <tbody>
+                                <tr>
+                                    <td><strong>Descrição:</strong></td>
+                                    <td>Trabalho de inovação para a elaboração de uma solução tecnológica para o ensino da técnica de personas, utilizando uma abordagem estruturada e centrada no usuário.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Ano:</strong></td>
+                                    <td>2024</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Link:</strong></td>
+                                    <td>
+                                        <a href="https://drive.google.com/file/d/14cCeJw0-gG5vB7AXoxO3ydIkf_jXd72Q/view?usp=sharing" target="_blank" class="btn btn-outline-primary">
+                                            <i class="fas fa-download"></i> Download
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="modal2">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Sobre mim</h5>
+                        <button type="button" class="close" onclick="closeModal('modal2')">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td colspan="2"><h5>Formação acadêmica:</h5></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><strong>Universidade do Estado de Santa Catarina (UDESC)</strong>
+                                    <h6>Curso Superior de Tecnologia (CST), Tecnologia em Análise e Desenvolvimento de Sistemas [2020-2024]</h6>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><strong>EEEFM Honório Fraga</strong>
+                                    <h6>Técnico em Informática para Internet [2016-2018]</h6>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><h5>Experiência profissionais:</h5></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><strong>Para mais detalhes acesse meu perfil abaixo</strong><br><br>
+                                        <h6>[2019] Arte finalista em Gráfica (Joinville/SC)</h6>
+                                        <h6>[2020-2024] Desenvolvedor back-end Java em empresa de Software (Joinville/SC)</h6>
+                                        <a href="https://www.linkedin.com/in/gustavo-de-souza-crispim-4b8685178/" target="_blank" class="btn btn-outline-primary">
+                                            <i class="fab fa-linkedin"></i> Gustavo de Souza Crispim
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        
+    
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+        <script src="modal/modal.js"></script> 
+
+    <footer class="bg-dark text-white text-center py-4">
+        <p class="mb-0">© 2024 Gustavo de Souza Crispim. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="modal/modal.js"></script>
+</body>
+</html>
