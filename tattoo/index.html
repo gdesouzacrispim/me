@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page de Tatuagens</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @font-face {
+            font-family: 'NexaHeavy';
+            src: url('Nexa-Heavy.ttf') format('truetype');
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-black text-white">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">Estúdio de Tatuagens</a>
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item"><a class="nav-link" href="#sobre">Sobre</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#galeria">Galeria</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="sobre" class="hero">
+           
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1>MUDE</h1>
+                        <h1>SUA</h1>
+                        <h1>VIDA</h1>
+                        <h1>COM</h1>
+                        <h1>TATTOO</h1>
+                        <h4>Eternize sua essência, dê voz à sua alma e transforme seu corpo em uma obra de arte</h4>
+                    </div>
+                    <div class="col-md-6">
+                        <ul>
+                            <li><strong>Colatina, 28 de novembro</strong><br>Evento destinado a iniciantes em tatuagem. <br>Venha aprender com os melhores!</li><br><br>
+                            <li><strong>Vitória, 15 de dezembro</strong><br>Workshop sobre técnicas avançadas de tatuagem.</li><br><br>
+                            <li><strong>Cariacica, 10 de janeiro</strong><br>Exposição de arte corporal com diversos artistas.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section id="galeria" class="py-5">
+            <div class="container">
+                <h2 class="text-left mb-5" style="color: white;">Galeria de Tatuagens</h2>
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <img src="image.jpg" class="img-fluid" alt="Imagem 1">
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <img src="image2.jpg" class="img-fluid" alt="Imagem 2">
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <img src="image3.jpg" class="img-fluid" alt="Imagem 3">
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <img src="image4.jpg" class="img-fluid" alt="Imagem 4">
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <img src="image5.jpg" class="img-fluid" alt="Imagem 5">
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <img src="image6.jpg" class="img-fluid" alt="Imagem 6">
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <img src="image.jpg" class="img-fluid" alt="Imagem 1">
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <img src="image2.jpg" class="img-fluid" alt="Imagem 2">
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <img src="image3.jpg" class="img-fluid" alt="Imagem 3">
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <img src="image4.jpg" class="img-fluid" alt="Imagem 4">
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <img src="image5.jpg" class="img-fluid" alt="Imagem 5">
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <img src="image6.jpg" class="img-fluid" alt="Imagem 6">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contato" class="py-5 bg-light">
+            <div class="container">
+                <h2 class="text-center mb-5">Entre em Contato</h2>
+        
+                <div class="row">
+                    <div class="col-md-6 offset-md-3">
+                        <form action="#" method="POST">
+                            <div class="form-group">
+                                <label for="nome">Seu Nome</label>
+                                <input type="text" class="form-control" id="nome" placeholder="Digite seu nome" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Seu E-mail</label>
+                                <input type="email" class="form-control" id="email" placeholder="Digite seu e-mail" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="mensagem">Mensagem</label>
+                                <textarea class="form-control" id="mensagem" rows="4" placeholder="Escreva sua mensagem" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-dark btn-block">Enviar Mensagem</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        
+            <a href="https://wa.me/1234567890" class="whatsapp-icon" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </section>
+    </main>
+
+    <footer class="text-center bg-black text-white py-3">
+        <p>&copy; 2024 Estúdio de Tatuagens. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

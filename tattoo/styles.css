@@ -1,0 +1,154 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1, h2 {
+    font-family: 'NexaHeavy', Arial, sans-serif;
+}
+
+header {
+    position: relative;
+    background-color: rgb(22 20 20)
+}
+
+.navbar-nav .nav-link {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.navbar-nav .nav-link.active {
+    color: white;
+}
+
+.navbar-nav .nav-link.active::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: green;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+}
+
+.hero {
+    background-image: url('back.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    position: relative;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.hero h1, .hero p {
+    position: relative;
+}
+
+main {
+    background-color: #f4f4f4;
+}
+
+section {
+    padding: 50px 20px;
+}
+
+footer {
+    text-align: center;
+    background-color: rgb(22 20 20);
+}
+
+#galeria img {
+    max-width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+#galeria img:hover {
+    transform: scale(1.05);
+}
+
+#galeria .row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+#galeria .col-md-4 {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#galeria {
+    background-color: rgb(22 20 20)
+}
+
+#contato form {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#contato .form-control {
+    border-radius: 5px;
+    border: 2px solid #ddd;
+    transition: all 0.3s;
+}
+
+#contato .form-control:focus {
+    border-color: #17a2b8;
+    box-shadow: 0 0 5px rgba(23, 162, 184, 0.5);
+}
+
+#contato button {
+    border-radius: 5px;
+    padding: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.3s;
+}
+
+#contato button:hover {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.whatsapp-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25d366;
+    color: white;
+    padding: 15px;
+    border-radius: 50%;
+    font-size: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.whatsapp-icon:hover {
+    transform: scale(1.1);
+}
+
+.fab.fa-whatsapp {
+    margin: 0;
+}
