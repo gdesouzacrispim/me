@@ -1,209 +1,450 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Gustavo de Souza Crispim</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="estilos.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Gustavo de Souza Crispim — backend developer em Colatina, ES.">
+<meta name="author" content="Gustavo de Souza Crispim">
+<title>guto.crispim — backend dev</title>
 
+<!--
+    The Three Laws of Robotics
+    1. A robot may not injure a human being.
+    2. A robot must obey the orders given it by human beings.
+    3. A robot must protect its own existence.
+                                  — Isaac Asimov, 1942
 
+    se você é dev e tá lendo isso aqui, abre o console também. ;)
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --bg: #f3efe6;
+        --paper: #ebe5d6;
+        --ink: #1a1a1a;
+        --muted: #767066;
+        --accent: #a83232;
+        --line: #d3ccbb;
+        --tag-bg: rgba(0, 0, 0, 0.025);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: 'JetBrains Mono', 'Courier New', monospace;
+        font-size: 14.5px;
+        line-height: 1.75;
+        -webkit-font-smoothing: antialiased;
+        font-feature-settings: "ss01", "ss02";
+    }
+
+    /* Subtle paper / scanline texture — atmosphere not noise */
+    body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background-image: repeating-linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.012) 0,
+            rgba(0, 0, 0, 0.012) 1px,
+            transparent 1px,
+            transparent 3px
+        );
+        z-index: 100;
+    }
+
+    main {
+        max-width: 620px;
+        margin: 0 auto;
+        padding: 72px 28px 100px;
+        position: relative;
+    }
+
+    /* ── header ─────────────────────────────────────── */
+    header {
+        border-bottom: 1px dashed var(--line);
+        padding-bottom: 22px;
+        margin-bottom: 32px;
+    }
+
+    .prompt {
+        color: var(--muted);
+        font-size: 0.85rem;
+    }
+
+    .prompt::before {
+        content: '$ ';
+        color: var(--accent);
+        font-weight: 700;
+    }
+
+    h1 {
+        font-size: 1.45rem;
+        font-weight: 700;
+        margin-top: 8px;
+        letter-spacing: -0.01em;
+    }
+
+    .cursor {
+        display: inline-block;
+        width: 0.55em;
+        height: 1.05em;
+        background: var(--ink);
+        vertical-align: -0.15em;
+        margin-left: 6px;
+        animation: blink 1.05s steps(2, end) infinite;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .subtitle {
+        color: var(--muted);
+        margin-top: 6px;
+        font-size: 0.88rem;
+    }
+
+    /* ── sections ───────────────────────────────────── */
+    section { margin-top: 36px; }
+
+    section h2 {
+        font-size: 0.78rem;
+        font-weight: 700;
+        text-transform: lowercase;
+        color: var(--accent);
+        margin-bottom: 14px;
+        letter-spacing: 0.06em;
+    }
+
+    section h2::before {
+        content: '> ';
+        color: var(--muted);
+        font-weight: 400;
+    }
+
+    p { margin-bottom: 12px; max-width: 60ch; }
+
+    .comment {
+        color: var(--muted);
+        font-style: italic;
+    }
+
+    /* ── now playing block ──────────────────────────── */
+    .now {
+        border-left: 2px solid var(--accent);
+        padding: 4px 0 4px 18px;
+        background: var(--paper);
+        background-clip: padding-box;
+    }
+
+    .now-row {
+        display: grid;
+        grid-template-columns: 92px 1fr;
+        gap: 10px;
+        margin-bottom: 4px;
+        font-size: 0.92rem;
+    }
+
+    .now-row .label {
+        color: var(--accent);
+        font-weight: 500;
+    }
+
+    .now-row .label::before {
+        content: '[';
+        color: var(--muted);
+        font-weight: 400;
+    }
+    .now-row .label::after {
+        content: ']';
+        color: var(--muted);
+        font-weight: 400;
+    }
+
+    /* ── stack tags ─────────────────────────────────── */
+    .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .tag {
+        padding: 2px 8px;
+        border: 1px solid var(--line);
+        background: var(--tag-bg);
+        font-size: 0.78rem;
+        color: var(--muted);
+        white-space: nowrap;
+    }
+
+    .tag:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+    }
+
+    /* ── projects ───────────────────────────────────── */
+    .project {
+        display: flex;
+        gap: 12px;
+        align-items: baseline;
+        margin-bottom: 8px;
+    }
+
+    .project::before {
+        content: '─';
+        color: var(--muted);
+        flex-shrink: 0;
+    }
+
+    /* ── links / icons ──────────────────────────────── */
+    a {
+        color: var(--ink);
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 3px;
+        text-decoration-color: var(--line);
+        transition: color 0.15s, text-decoration-color 0.15s;
+    }
+
+    a:hover {
+        color: var(--accent);
+        text-decoration-color: var(--accent);
+    }
+
+    .links {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .links a {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        width: fit-content;
+        padding: 2px 0;
+    }
+
+    .links a .arrow {
+        color: var(--muted);
+        opacity: 0;
+        transform: translateX(-4px);
+        transition: opacity 0.15s, transform 0.15s;
+    }
+
+    .links a:hover .arrow {
+        opacity: 1;
+        transform: translateX(0);
+        color: var(--accent);
+    }
+
+    .links svg {
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+        color: var(--ink);
+        transition: color 0.15s;
+    }
+
+    .links a:hover svg { color: var(--accent); }
+
+    .link-label {
+        font-weight: 500;
+    }
+
+    .link-handle {
+        color: var(--muted);
+        font-size: 0.85rem;
+    }
+
+    /* ── footer ─────────────────────────────────────── */
+    footer {
+        margin-top: 64px;
+        padding-top: 22px;
+        border-top: 1px dashed var(--line);
+        color: var(--muted);
+        font-size: 0.76rem;
+    }
+
+    .foot-row {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .ascii {
+        white-space: pre;
+        line-height: 1.15;
+        color: var(--muted);
+        font-size: 0.72rem;
+        margin-top: 28px;
+        opacity: 0.65;
+        text-align: center;
+    }
+
+    /* ── responsive ─────────────────────────────────── */
+    @media (max-width: 480px) {
+        main { padding: 48px 20px 72px; }
+        body { font-size: 13.5px; }
+        h1 { font-size: 1.2rem; }
+        .now-row { grid-template-columns: 80px 1fr; gap: 8px; }
+    }
+
+    /* selection */
+    ::selection {
+        background: var(--accent);
+        color: var(--bg);
+    }
+</style>
 </head>
-
-<script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
-<script type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
-</script>
-<script type="text/javascript">
-   (function(){
-      emailjs.init({
-        publicKey: "Uvk9PJyVhWE1NisBD",
-      });
-   })();
-</script>
-
-
 <body>
+<main>
 
-    <a href="https://wa.me/5547992072150?text=Olá%2C%20vim%20do%20seu%20website%20e%20gostaria%20de%20mais%20informações" class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">Gustavo de Souza Crispim</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#home">Início</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#servicos">Serviços</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#portfolio">Portfólio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#sobre">Sobre</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contato">Contato</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <header id="home" class="bg-primary text-white text-center" style="padding: 100px 0;">
-        <div class="container">
-            <h1 class="display-4">Soluções em Tecnologia, Educação e Design</h1>
-            <p class="lead">Levando seu projeto ao próximo nível com soluções inovadoras</p>
-            <a href="#servicos" class="btn btn-outline-light btn-lg">Conheça Nossos Serviços</a>
-        </div>
+    <header>
+        <div class="prompt">whoami</div>
+        <h1>gustavo de souza crispim<span class="cursor"></span></h1>
+        <div class="subtitle">backend developer @ totvs · colatina, es — br</div>
     </header>
 
-    <section id="servicos" class="py-5">
-        <div class="container">
-            <h2 class="text-center">Nossos Serviços</h2>
-            <div class="row mt-4">
-                <div class="col-md-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h3 class="card-title">Tecnologia</h3>
-                            <p class="card-text">Desenvolvimento de sites institucionais, e-commerce, landing pages para cursos e empresas. Soluções tecnológicas personalizadas.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h3 class="card-title">Educação</h3>
-                            <p class="card-text">Assesoria para trabalhos acadêmicos (TCC, monografias, etc) e aulas de reforço em física, matemática e programação.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h3 class="card-title">Design e Comunicação Visual</h3>
-                            <p class="card-text">Crie sua identidade visual com cartões de visita, banners, adesivos e serviços de social media. Construa uma marca forte com a nossa ajuda.</p>
-                        </div>
-                    </div>
-                </div>
+    <!-- ─── about ────────────────────────────────────── -->
+    <section>
+        <h2>about</h2>
+        <p>
+            Formado pela <a href="https://www.udesc.br" target="_blank" rel="noopener">UDESC</a> em Santa Catarina,
+            hoje escrevo código backend na <a href="https://www.totvs.com" target="_blank" rel="noopener">TOTVS</a>.
+            <span class="comment">// código que roda em silêncio em milhares de empresas.</span>
+        </p>
+        <p>
+            Fora do horário comercial, construo sites pequenos pra vender —
+            soluções enxutas pra negócios reais. Um dos vários por vir.
+        </p>
+    </section>
+
+    <!-- ─── currently ────────────────────────────────── -->
+    <section>
+        <h2>currently</h2>
+        <div class="now">
+            <div class="now-row">
+                <span class="label">reading</span>
+                <span>Fundação · <span class="comment">Isaac Asimov</span></span>
+            </div>
+            <div class="now-row">
+                <span class="label">listening</span>
+                <span>Xadrez Verbal &nbsp;&middot;&nbsp; Central 3</span>
+            </div>
+            <div class="now-row">
+                <span class="label">recently</span>
+                <span>Artemis · <span class="comment">Andy Weir</span></span>
+            </div>
+            <div class="now-row">
+                <span class="label">watching</span>
+                <span>The Big Bang Theory <span class="comment">// bazinga.</span></span>
             </div>
         </div>
     </section>
 
-    <section id="portfolio" class="py-5 bg-light">
-        <div class="container">
-            <h2 class="text-center">Portfólio</h2>
-            <p class="text-center">Veja alguns dos nossos trabalhos recentes.</p>
-            <div class="row mt-4">
-                <div class="col-md-4">
-                    <a href="educacao.html">
-                        <img src="img/educa.png" class="img-fluid mb-4" alt="Projeto 1">
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <a href="tecnologia.html">
-                        <img src="img/tecno.png" class="img-fluid mb-4" alt="Projeto 2">
-                    </a>                
-                </div>
-                <div class="col-md-4">
-                    <a href="design.html">
-                        <img src="img/comunica.png" class="img-fluid mb-4" alt="Projeto 3">
-                    </a> 
-                </div>
-            </div>
+    <!-- ─── projects ─────────────────────────────────── -->
+    <section>
+        <h2>projects</h2>
+        <div class="project">
+            <span><strong>petshop</strong> &nbsp;<span class="comment">— site institucional · 2026</span></span>
+        </div>
+        <div class="project">
+            <span><span class="comment">// + projetos a caminho. fica de olho no github.</span></span>
         </div>
     </section>
 
-    <section id="sobre" class="py-5">
-        <div class="container">
-            <h2 class="text-center">Quem sou eu?</h2>
-            <p class="text-center">Sou desenvolvedor e formado em Análise e Desenvolvimento de Sistemas pela Universidade Estadual de Santa Catarina, com experiência em design gráfico e desenvolvimento de software. Atualmente, integro a equipe da TOTVS, uma das maiores empresas de tecnologia da América Latina.
-
-                Ajudo clientes a fortalecer sua presença digital com soluções práticas, como desenvolvimento de websites, suporte técnico a projetos acadêmicos e criação de identidades visuais. Meu compromisso é simplificar o processo de transformar ideias em realidade.<div class="row mt-4">
-                <div class="col-md-6">
-                    <h3>Missão</h3>
-                    <p>Meu objetivo é proporcionar soluções completas em tecnologia e design, utilizando a inovação como ferramenta para transformar projetos em resultados tangíveis. Buscamos apoiar nossos clientes com expertise técnica, criatividade e uma abordagem centrada em suas necessidades, oferecendo desde o desenvolvimento de websites até consultoria educacional.</p>
-                </div>
-                <div class="col-md-6">
-                    <h3>Visão</h3>
-                    <p>Eu acredito no poder da tecnologia e da educação para mudar vidas e negócios. Quero ser reconhecido como um profissional em quem as pessoas confiam e recorrem quando precisam de algo especial - alguém que não apenas entrega resultados, mas entende a real necessidade de cada cliente e transforma isso em algo concreto.</p>
-                </div>
-            </div>
+    <!-- ─── stack ────────────────────────────────────── -->
+    <!-- edite as tags abaixo conforme as ferramentas que você quer destacar -->
+    <section>
+        <h2>stack</h2>
+        <div class="tags">
+            <span class="tag">java</span>
+            <span class="tag">sql</span>
+            <span class="tag">git</span>
+            <span class="tag">linux</span>
+            <span class="tag">docker</span>
+            <span class="tag">html/css</span>
+            <span class="tag">javascript</span>
+            <span class="tag">vim</span>
         </div>
     </section>
 
-<section id="contato" class="py-5 bg-dark text-white">
-    <div class="container">
-        <h2 class="text-center">Entre em Contato</h2>
-        <p class="text-center">Ficaremos felizes em ajudar você com seu próximo projeto.</p>
-        <div class="row mt-4">
-            <div class="col-md-6">
-                <form id="contact-form">
-                    <div class="form-group">
-                        <label for="name">Nome</label>
-                        <input type="text" class="form-control" id="name" placeholder="Seu nome" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">E-mail</label>
-                        <input type="email" class="form-control" id="email" placeholder="Seu e-mail" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Mensagem</label>
-                        <textarea class="form-control" id="message" rows="4" placeholder="Sua mensagem" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-outline-light">Enviar Mensagem</button>
-                </form>
-                <p id="success-message" class="text-success mt-3" style="display:none;">Mensagem enviada com sucesso!</p>
-            </div>
-            <div class="col-md-6 text-center">
-                <p><i class="fas fa-phone"></i> (47) 99207-2150</p>
-                <p><i class="fas fa-envelope"></i> gdesouzacrispim@gmail.com</p>
-                <p><i class="fas fa-map-marker-alt"></i> Colatina, Espírito Santo</p>
-            </div>
+    <!-- ─── elsewhere ────────────────────────────────── -->
+    <section>
+        <h2>elsewhere</h2>
+        <div class="links">
+            <a href="https://github.com/gdesouzacrispim" target="_blank" rel="noopener" aria-label="GitHub">
+                <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                    <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38v-1.34c-2.22.48-2.69-1.07-2.69-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.7 7.7 0 014 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                </svg>
+                <span class="link-label">github</span>
+                <span class="link-handle">@gdesouzacrispim</span>
+                <span class="arrow">→</span>
+            </a>
+
+            <a href="https://www.linkedin.com/in/gustavo-de-souza-crispim-4b8685178/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                    <path d="M13.6 13.6h-2.37V9.9c0-.88-.02-2.02-1.23-2.02-1.23 0-1.42.96-1.42 1.96v3.76H6.21V6h2.27v1.04h.03c.32-.6 1.09-1.23 2.24-1.23 2.4 0 2.85 1.58 2.85 3.63v4.16zM3.54 4.95a1.37 1.37 0 110-2.74 1.37 1.37 0 010 2.74zM4.73 13.6H2.36V6h2.37v7.6zM14.78 0H1.22C.55 0 0 .54 0 1.2v13.6c0 .66.55 1.2 1.22 1.2h13.56c.67 0 1.22-.54 1.22-1.2V1.2C16 .54 15.45 0 14.78 0z"/>
+                </svg>
+                <span class="link-label">linkedin</span>
+                <span class="link-handle">/in/gustavo-de-souza-crispim</span>
+                <span class="arrow">→</span>
+            </a>
+
+            <a href="https://www.instagram.com/gustavoscrispim/" target="_blank" rel="noopener" aria-label="Instagram">
+                <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                    <path d="M8 1.44c2.13 0 2.39.01 3.23.05.78.04 1.2.17 1.49.28.37.14.64.32.92.6.28.28.46.55.6.92.11.28.24.7.28 1.49.04.84.05 1.1.05 3.23s-.01 2.39-.05 3.23c-.04.78-.17 1.2-.28 1.49-.14.37-.32.64-.6.92a2.5 2.5 0 01-.92.6c-.28.11-.71.24-1.49.28-.84.04-1.1.05-3.23.05s-2.39-.01-3.23-.05c-.78-.04-1.2-.17-1.49-.28a2.5 2.5 0 01-.92-.6 2.5 2.5 0 01-.6-.92c-.11-.28-.24-.71-.28-1.49C1.45 10.39 1.44 10.13 1.44 8s.01-2.39.05-3.23c.04-.78.17-1.2.28-1.49.14-.37.32-.64.6-.92.28-.28.55-.46.92-.6.28-.11.71-.24 1.49-.28C5.61 1.45 5.87 1.44 8 1.44M8 0C5.83 0 5.56.01 4.7.05c-.85.04-1.44.18-1.95.37-.53.21-.98.48-1.42.93C.88 1.79.6 2.24.4 2.76.21 3.27.07 3.86.03 4.71.01 5.56 0 5.83 0 8s.01 2.44.05 3.3c.04.84.18 1.43.37 1.94.21.53.48.98.93 1.42.45.45.9.72 1.42.93.51.2 1.1.34 1.95.37.85.04 1.13.05 3.3.05s2.44-.01 3.3-.05c.84-.04 1.43-.18 1.94-.37.53-.21.98-.48 1.42-.93.45-.45.72-.9.93-1.42.2-.51.34-1.1.37-1.94.04-.86.05-1.13.05-3.3s-.01-2.44-.05-3.3c-.04-.84-.18-1.43-.37-1.94a3.92 3.92 0 00-.93-1.42 3.92 3.92 0 00-1.42-.93C12.73.21 12.14.07 11.3.03 10.44.01 10.17 0 8 0zm0 3.89a4.11 4.11 0 100 8.22 4.11 4.11 0 000-8.22zm0 6.78a2.67 2.67 0 110-5.34 2.67 2.67 0 010 5.34zm5.23-6.94a.96.96 0 11-1.92 0 .96.96 0 011.92 0z"/>
+                </svg>
+                <span class="link-label">instagram</span>
+                <span class="link-handle">@gustavoscrispim</span>
+                <span class="arrow">→</span>
+            </a>
         </div>
-    </div>
-</section>
+    </section>
 
-<script type="text/javascript">
-    document.getElementById('contact-form').addEventListener('submit', function(event) {
-        event.preventDefault();
+    <!-- ─── contact ──────────────────────────────────── -->
+    <section>
+        <h2>contact</h2>
+        <p class="comment">// resposta mais rápida via linkedin ↑</p>
+    </section>
 
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const message = document.getElementById('message').value;
-
-        emailjs.send("service_bomgo4r","template_uk3hg3s",{
-            from_name: name,
-            reply_to: email,
-            message: message
-        }).then(function(response) {
-            console.log('SUCCESS!', response.status, response.text);
-            document.getElementById('success-message').style.display = 'block';
-            document.getElementById('contact-form').reset();  
-        }, function(error) {
-            console.log('FAILED...', error);
-            alert('Falha no envio. Tente novamente.');
-        });
-    });
-</script>
-
-    <footer class="bg-dark text-white text-center py-3">
-        <div class="container">
-            <p>&copy; 2024 Gustavo de Souza Crispim. Todos os direitos reservados.</p>
+    <!-- ─── footer ───────────────────────────────────── -->
+    <footer>
+        <div class="foot-row">
+            <span>© <span id="year">2026</span> guto · made with <strong>vim</strong> &amp; café</span>
+            <span>v0.42.0</span>
         </div>
+
+<pre class="ascii">
+   .::.
+  [ &#9822; ]   psychohistory says: keep building.
+   '··'
+</pre>
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</main>
+
+<script>
+    /* ── tiny scripts: year + dev easter egg ───────────────── */
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /*  Hari Seldon would approve.
+        Open the console — pra quem chega até aqui. */
+    const css1 = 'font-family: monospace; font-size: 14px; color:#a83232; font-weight: 700;';
+    const css2 = 'font-family: monospace; color: #767066;';
+    console.log('%c> olá, dev.', css1);
+    console.log('%c  se você é fã de Asimov, sci-fi ou só curioso — tmj.', css2);
+    console.log('%c  github.com/gdesouzacrispim', css2);
+    console.log('%c  // bazinga.', css2);
+</script>
 </body>
 </html>
