@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgendaLead — Apresentação Comercial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #FAFAFA;
+      --mist: #F4F4F5;
+      --line: #E4E4E7;
+      --line-strong: #D4D4D8;
+      --fg: #18181B;
+      --muted: #52525B;
+      --subtle: #A1A1AA;
+      --brand: #2563EB;
+      --brand-deep: #1D4ED8;
+      --brand-tint: #EFF6FF;
+      --success: #059669;
+      --success-tint: #ECFDF5;
+      --accent: #F59E0B;
+      --accent-tint: #FEF3C7;
+      --danger: #DC2626;
+      --danger-tint: #FEF2F2;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--paper);
+      color: var(--fg);
+      font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      overflow: hidden;
+    }
+
+    .deck {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      background:
+        radial-gradient(ellipse at top right, rgba(239, 246, 255, 0.9) 0%, transparent 44%),
+        radial-gradient(ellipse at bottom left, rgba(244, 244, 245, 0.8) 0%, transparent 52%),
+        var(--paper);
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 56px 72px;
+      display: none;
+      overflow: hidden;
+    }
+
+    .slide.active {
+      display: flex;
+      animation: fade 280ms ease-out;
+    }
+
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .slide-inner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.06fr 0.94fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .slide.center .slide-inner {
+      grid-template-columns: 1fr;
+      align-items: center;
+      justify-items: center;
+      text-align: center;
+    }
+
+    .brand-row {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      z-index: 3;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--fg);
+      color: var(--paper);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 27px;
+      letter-spacing: -0.06em;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      line-height: 1;
+    }
+
+    .brand-name {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .brand-caption {
+      font-family: "JetBrains Mono", monospace;
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    .slide-count {
+      position: absolute;
+      top: 2px;
+      right: 0;
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 700;
+      color: var(--brand);
+      border: 1px solid var(--brand);
+      border-radius: 999px;
+      padding: 8px 13px;
+      font-size: 14px;
+      background: rgba(250, 250, 250, 0.75);
+      backdrop-filter: blur(10px);
+    }
+
+    .eyebrow {
+      font-family: "JetBrains Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--brand);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: clamp(52px, 6.3vw, 92px);
+      line-height: 0.99;
+      letter-spacing: -0.07em;
+      margin: 0;
+      font-weight: 800;
+      max-width: 980px;
+    }
+
+    h1 .blue, h2 .blue, .blue { color: var(--brand); }
+
+    h2 {
+      font-size: clamp(42px, 4.3vw, 68px);
+      line-height: 1.03;
+      letter-spacing: -0.06em;
+      margin: 0;
+      font-weight: 800;
+      max-width: 840px;
+    }
+
+    .lead {
+      margin-top: 28px;
+      font-size: clamp(20px, 1.8vw, 30px);
+      line-height: 1.35;
+      color: var(--muted);
+      max-width: 760px;
+      letter-spacing: -0.03em;
+    }
+
+    .lead strong { color: var(--fg); font-weight: 800; }
+
+    .small {
+      font-size: 17px;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    .mono {
+      font-family: "JetBrains Mono", monospace;
+    }
+
+    .dot-grid {
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      right: -20px;
+      top: 110px;
+      opacity: 0.42;
+      background-image: radial-gradient(var(--line-strong) 1.4px, transparent 1.4px);
+      background-size: 24px 24px;
+      pointer-events: none;
+    }
+
+    .arc-lines {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      border: 1px solid rgba(37, 99, 235, 0.12);
+      right: -300px;
+      bottom: -300px;
+    }
+
+    .arc-lines::before,
+    .arc-lines::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(37, 99, 235, 0.12);
+      inset: 48px;
+    }
+
+    .arc-lines::after { inset: 96px; }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.74);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+      backdrop-filter: blur(14px);
+    }
+
+    .chat-panel {
+      width: 100%;
+      max-width: 560px;
+      padding: 18px;
+      align-self: center;
+      justify-self: center;
+    }
+
+    .chat-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 6px 18px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 14px;
+    }
+
+    .avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--brand-tint);
+      display: grid;
+      place-items: center;
+      color: var(--brand);
+      font-weight: 800;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      display: inline-block;
+      margin-right: 6px;
+    }
+
+    .message {
+      width: fit-content;
+      max-width: 86%;
+      padding: 14px 16px;
+      border-radius: 16px;
+      margin: 12px 0;
+      font-size: 17px;
+      line-height: 1.35;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    }
+
+    .message.left { background: var(--mist); color: var(--fg); }
+    .message.right { margin-left: auto; background: var(--brand); color: white; }
+
+    .typing {
+      width: 70px;
+      padding: 16px;
+      background: var(--mist);
+      border-radius: 16px;
+      display: flex;
+      gap: 5px;
+      margin-top: 12px;
+    }
+
+    .typing span {
+      width: 7px;
+      height: 7px;
+      background: var(--subtle);
+      border-radius: 50%;
+      display: block;
+    }
+
+    .warning-card {
+      margin-top: 28px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 22px;
+      border-radius: 16px;
+      background: linear-gradient(0deg, rgba(239,246,255,0.86), rgba(239,246,255,0.86));
+      color: var(--fg);
+      border: 1px solid rgba(37,99,235,0.12);
+      max-width: 640px;
+    }
+
+    .icon-bubble {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: var(--brand);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+    }
+
+    .list {
+      display: grid;
+      gap: 14px;
+      margin-top: 28px;
+      max-width: 620px;
+    }
+
+    .list-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.72);
+      border-radius: 16px;
+      color: var(--fg);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .list-item .circle {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--brand-tint);
+      color: var(--brand);
+      font-weight: 900;
+      flex: 0 0 auto;
+    }
+
+    .list-item.danger .circle { background: var(--danger-tint); color: var(--danger); }
+    .list-item.success .circle { background: var(--success-tint); color: var(--success); }
+    .list-item.accent .circle { background: var(--accent-tint); color: var(--accent); }
+
+    .workflow {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      max-width: 560px;
+      justify-self: center;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 62px 1fr;
+      gap: 18px;
+      align-items: center;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.78);
+    }
+
+    .step-number {
+      font-family: "JetBrains Mono", monospace;
+      width: 62px;
+      height: 62px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: var(--fg);
+      color: var(--paper);
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .step h3 {
+      margin: 0 0 4px;
+      font-size: 22px;
+      letter-spacing: -0.04em;
+    }
+
+    .step p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.35; }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      max-width: 620px;
+      justify-self: center;
+    }
+
+    .metric-card {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.78);
+    }
+
+    .metric-card .number {
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 800;
+      font-size: clamp(42px, 4.4vw, 72px);
+      color: var(--brand);
+      letter-spacing: -0.08em;
+      line-height: 1;
+    }
+
+    .metric-card .label {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.35;
+    }
+
+    .niche-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 34px;
+      width: min(960px, 100%);
+    }
+
+    .niche {
+      padding: 18px 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.76);
+      border-radius: 16px;
+      text-align: left;
+      min-height: 110px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .niche .niche-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: var(--brand-tint);
+      color: var(--brand);
+      display: grid;
+      place-items: center;
+      margin-bottom: 20px;
+    }
+
+    .niche strong { font-size: 16px; letter-spacing: -0.03em; }
+    .niche span { color: var(--muted); font-size: 12px; margin-top: 4px; }
+
+    .device {
+      border: 1px solid var(--line);
+      border-radius: 34px;
+      background: var(--fg);
+      padding: 12px;
+      width: min(360px, 100%);
+      margin: auto;
+      box-shadow: 0 20px 60px rgba(24,24,27,0.14);
+    }
+
+    .device-screen {
+      background: var(--paper);
+      min-height: 610px;
+      border-radius: 25px;
+      overflow: hidden;
+      padding: 18px;
+    }
+
+    .screen-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      color: var(--muted);
+      padding-bottom: 18px;
+    }
+
+    .phone-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+      background: #fff;
+      margin-bottom: 14px;
+    }
+
+    .phone-card h4 { margin: 0 0 8px; font-size: 17px; }
+    .phone-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.35; }
+
+    .calendar-card {
+      width: min(620px, 100%);
+      padding: 24px;
+      justify-self: center;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .tab {
+      padding: 12px;
+      border-radius: 12px;
+      background: var(--mist);
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .tab.active { background: var(--fg); color: var(--paper); }
+
+    .appointment {
+      display: grid;
+      grid-template-columns: 88px 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      margin-top: 12px;
+    }
+
+    .timebox {
+      background: var(--brand);
+      color: white;
+      border-radius: 14px;
+      padding: 12px;
+      text-align: center;
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 800;
+    }
+
+    .badge {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      padding: 7px 9px;
+      border-radius: 999px;
+      background: var(--brand-tint);
+      color: var(--brand);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .pricing {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      width: min(1080px, 100%);
+      margin-top: 36px;
+    }
+
+    .price-card {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: rgba(255,255,255,0.78);
+      padding: 24px;
+      text-align: left;
+      min-height: 290px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .price-card.featured {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 4px rgba(37,99,235,0.08);
+    }
+
+    .price-name { font-size: 20px; font-weight: 800; letter-spacing: -0.04em; }
+    .price { font-family: "JetBrains Mono", monospace; font-size: 34px; font-weight: 800; color: var(--brand); margin: 18px 0; letter-spacing: -0.07em; }
+    .price-card ul { padding: 0; margin: 0; list-style: none; display: grid; gap: 10px; color: var(--muted); font-size: 14px; }
+    .price-card li::before { content: "✓"; color: var(--success); font-weight: 900; margin-right: 8px; }
+
+    .cta-box {
+      padding: 34px;
+      border-radius: 24px;
+      background: var(--fg);
+      color: var(--paper);
+      width: min(820px, 100%);
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(24,24,27,0.18);
+    }
+
+    .cta-box h2 { color: var(--paper); margin-inline: auto; }
+    .cta-box .lead { color: #D4D4D8; margin-inline: auto; }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--brand);
+      color: #fff;
+      border-radius: 12px;
+      padding: 16px 24px;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 800;
+      margin-top: 26px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+    }
+
+    .domain {
+      font-family: "JetBrains Mono", monospace;
+      color: var(--paper);
+      font-size: 19px;
+      margin-top: 20px;
+    }
+
+    .controls {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      display: flex;
+      gap: 10px;
+      z-index: 20;
+    }
+
+    .control-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.78);
+      color: var(--fg);
+      font-size: 20px;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+    }
+
+    .progress {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      height: 4px;
+      background: var(--brand);
+      z-index: 30;
+      transition: width 180ms ease;
+    }
+
+    .presenter-note {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      max-width: 760px;
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--subtle);
+      font-family: "JetBrains Mono", monospace;
+      display: none;
+    }
+
+    .tagline {
+      font-size: clamp(18px, 1.5vw, 24px);
+      color: var(--muted);
+      margin-top: 18px;
+      letter-spacing: -0.03em;
+    }
+
+    .logo-big {
+      width: 104px;
+      height: 104px;
+      border-radius: 28px;
+      background: var(--fg);
+      color: var(--paper);
+      display: grid;
+      place-items: center;
+      font-size: 70px;
+      font-weight: 800;
+      letter-spacing: -0.08em;
+      margin-bottom: 26px;
+    }
+
+    @media (max-width: 980px) {
+      body { overflow-y: auto; }
+      .deck { min-height: 100vh; height: auto; }
+      .slide { position: relative; min-height: 100vh; padding: 32px 22px 88px; }
+      .slide.active { display: flex; }
+      .slide:not(.active) { display: none; }
+      .slide-inner { grid-template-columns: 1fr; gap: 28px; padding-top: 74px; }
+      .brand-mark { width: 38px; height: 38px; font-size: 23px; border-radius: 10px; }
+      .brand-name { font-size: 18px; }
+      h1 { font-size: 48px; }
+      h2 { font-size: 38px; }
+      .lead { font-size: 19px; }
+      .metric-grid, .pricing, .niche-grid { grid-template-columns: 1fr; }
+      .appointment { grid-template-columns: 1fr; }
+      .controls { right: 14px; bottom: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck" aria-label="Apresentação comercial AgendaLead">
+    <section class="slide active center">
+      <div class="slide-inner">
+        <div class="dot-grid"></div>
+        <div class="arc-lines"></div>
+        <div>
+          <div class="logo-big">A</div>
+          <div class="eyebrow">AGENDALEAD · APRESENTAÇÃO COMERCIAL</div>
+          <h1>Transforme conversas em <span class="blue">clientes.</span></h1>
+          <p class="lead">O sistema operacional para profissionais que atendem, vendem e agendam pelo WhatsApp.</p>
+          <p class="tagline">crispim.app.br</p>
+        </div>
+        <div class="slide-count">1/14</div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="brand-row"><div class="brand-mark">A</div><div class="brand-text"><span class="brand-name">AgendaLead</span><span class="brand-caption">o problema</span></div></div>
+        <div class="slide-count">2/14</div>
+        <div>
+          <div class="eyebrow">01 · DOR REAL</div>
+          <h1>Pare de perder clientes <span class="blue">por demora.</span></h1>
+          <p class="lead">A pessoa viu seu conteúdo, chamou no WhatsApp e esperou. Enquanto você estava ocupado, ela encontrou outra opção.</p>
+          <div class="warning-card"><div class="icon-bubble">!</div><div><strong>Cada minuto de demora pode virar uma oportunidade perdida.</strong><br><span class="small">E quase sempre você só percebe quando o lead já esfriou.</span></div></div>
+        </div>
+        <div class="chat-panel panel">
+          <div class="chat-head"><div class="avatar">M</div><div><strong>Mensagem nova</strong><br><span class="small"><span class="status-dot"></span>agora no WhatsApp</span></div></div>
+          <div class="message left">Olá! Ainda tem horário disponível?</div>
+          <div class="message left">Quero saber mais sobre o serviço.</div>
+          <div class="message left">Qual o valor da consulta?</div>
+          <div class="typing"><span></span><span></span><span></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="brand-row"><div class="brand-mark">A</div><div class="brand-text"><span class="brand-name">AgendaLead</span><span class="brand-caption">a rotina</span></div></div>
+        <div class="slide-count">3/14</div>
+        <div>
+          <div class="eyebrow">02 · NÃO É FALTA DE DEMANDA</div>
+          <h2>O problema não é falta de cliente. É falta de tempo para atender todos bem.</h2>
+          <p class="lead">Profissionais que crescem no Instagram começam a viver uma rotina invisível de atendimento manual.</p>
+        </div>
+        <div class="list">
+          <div class="list-item danger"><div class="circle">×</div>Responder as mesmas perguntas todos os dias</div>
+          <div class="list-item danger"><div class="circle">×</div>Confirmar horários um por um</div>
+          <div class="list-item danger"><div class="circle">×</div>Procurar conversas antigas</div>
+          <div class="list-item danger"><div class="circle">×</div>Esquecer retornos e acompanhamentos</div>
+          <div class="list-item accent"><div class="circle">!</div>Perder oportunidades sem perceber</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="brand-row"><div class="brand-mark">A</div><div class="brand-text"><span class="brand-name">AgendaLead</span><span class="brand-caption">a virada</span></div></div>
+        <div class="slide-count">4/14</div>
+        <div>
+          <div class="eyebrow">03 · NOVA OPERAÇÃO</div>
+          <h1>E se seu WhatsApp trabalhasse <span class="blue">por você?</span></h1>
+          <p class="lead">Não para substituir seu atendimento humano. Para cuidar da etapa repetitiva, organizar interessados e manter a agenda funcionando.</p>
+        </div>
+        <div class="workflow">
+          <div class="step"><div class="step-number">01</div><div><h3>Cliente chama</h3><p>Instagram, Google, indicação, anúncio ou link público.</p></div></div>
+          <div class="step"><div class="step-number">02</div><div><h3>AgendaLead responde</h3><p>Atendimento inicial, dúvidas frequentes e qualificação.</p></div></div>
+          <div class="step"><div class="step-number">03</div><div><h3>Horário é sugerido</h3><p>A IA entende disponibilidade e registra o pré-agendamento.</p></div></div>
+          <div class="step"><div class="step-number">04</div><div><h3>Você confirma</h3><p>Controle humano com 1 clique. Mais segurança, menos caos.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="brand-row"><div class="brand-mark">A</div><div class="brand-text"><span class="brand-name">AgendaLead</span><span class="brand-caption">o produto</span></div></div>
+        <div class="slide-count">5/14</div>
+        <div>
+          <div class="eyebrow">04 · SISTEMA OPERACIONAL</div>
+          <h2>Uma plataforma para atender, agendar, lembrar, organizar e crescer.</h2>
+          <p class="lead">AgendaLead combina IA conversacional, agenda automática, lembretes, CRM, link público e financeiro em um só lugar.</p>
+        </div>
+        <div class="metric-grid">
+          <div class="metric-card"><div class="number">24h</div><div class="label">atendimento inicial mesmo fora do horário comercial</div></div>
+          <div class="metric-card"><div class="number">2x</div><div class="label">lembretes automáticos antes de cada consulta</div></div>
+          <div class="metric-card"><div class="number">1</div><div class="label">painel para leads, agenda, histórico e financeiro</div></div>
+          <div class="metric-card"><div class="number">7d</div><div class="label">teste gratuito para validar no dia a dia</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide center">
+      <div class="slide-inner">
+        <div class="brand-row"><div class="brand-mark">A</div><div class="brand-text"><span class="brand-name">AgendaLead</span><span class="brand-caption">nichos</span></div></div>
+        <div class="slide-count">6/14</div>
+        <div>
+          <div class="eyebrow">05 · FEITO PARA QUEM VENDE PELA INTERNET</div>
+          <h2>Funciona para diversos nichos que atendem pelo WhatsApp.</h2>
+          <p class="lead">O produto muda o vocabulário. A dor é a mesma: responder, organizar e converter conversas em clientes.</p>
+          <div class="niche-grid">
+            <div class="niche"><div class="niche-icon">◌</div><strong>Nutricionistas</strong><span>consultas, retornos e no-show</span></div>
+            <div class="niche"><div class="niche-icon">☉</div><strong>Psicólogos</strong><span>agenda, confirmação e triagem</span></div>
+            <div class="niche"><div class="niche-icon">◇</div><strong>Tarólogos</strong><span>leituras, horários e dúvidas</span></div>
+            <div class="niche"><div class="niche-icon">⌂</div><strong>Corretores</strong><span>visitas, imóveis e propostas</span></div>
+            <div class="niche"><div class="niche-icon">⚖</div><strong>Advogados</strong><span>pré-triagem e documentos</span></div>
+            <div class="niche"><div class="niche-icon">✦</div><strong>Estética</strong><span>procedimentos e cuidados</span></div>
+            <div class="niche"><div class="niche-icon">▲</div><strong>Personal trainers</strong><span>planos, avaliações e horários</span></div>
+            <div class="niche"><div class="niche-icon">＋</div><strong>Clínicas</strong><span>equipe, agenda e recorrência</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="brand-row"><div class="brand-mark">A</div><div class="brand-text"><span class="brand-name">AgendaLead</span><span class="brand-caption">atendimento</span></div></div>
+        <div class="slide-count">7/14</div>
+        <div>
+          <div class="eyebrow">06 · IA + HUMANO</div>
+          <h2>Atendimento automático, sem perder o controle humano.</h2>
+          <p class="lead">A IA conversa, entende contexto e organiza. Quando precisar, você assume a conversa com 1 clique.</p>
+          <div class="list">
+            <div class="list-item success"><div class="circle">✓</div>Responde dúvidas frequentes</div>
+            <div class="list-item success"><div class="circle">✓</div>Qualifica intenção do cliente</div>
+            <div class="list-item success"><div class="circle">✓</div>Usa sua base de conhecimento</div>
+            <div class="list-item success"><div class="circle">✓</div>Você pode assumir quando quiser</div>
+          </div>
+        </div>
+        <div class="chat-panel panel">
+          <div class="chat-head"><div class="avatar">IA</div><div><strong>IA atendente</strong><br><span class="small"><span class="status-dot"></span>online 24/7</span></div></div>
+          <div class="message left">Oi! Queria saber como funciona a consulta.</div>
+          <div class="message right">Claro! Vou te explicar rapidinho. Antes, você busca atendimento online ou presencial?</div>
+          <div class="message left">Online.</div>
+          <div class="message right">Perfeito. Posso te mostrar os horários disponíveis desta semana?</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="brand-row"><div class="brand-mark">A</div><div class="brand-text"><span class="brand-name">AgendaLead</span><span class="brand-caption">agenda</span></div></div>
+        <div class="slide-count">8/14</div>
+        <div>
+          <div class="eyebrow">07 · AGENDA INTELIGENTE</div>
+          <h2>O cliente agenda. A IA registra. Você confirma.</h2>
+          <p class="lead">Pré-agendamento evita bagunça: a tecnologia sugere, mas a decisão final continua com o profissional.</p>
+        </div>
+        <div class="calendar-card panel">
+          <div class="tabs"><div class="tab active">Próximos</div><div class="tab">Aguardando 3</div><div class="tab">Hoje</div><div class="tab">Passados</div></div>
+          <div class="appointment"><div class="timebox">14:00</div><div><strong>Maria Fernanda</strong><br><span class="small">Consulta inicial · WhatsApp</span></div><span class="badge">CONFIRMADO</span></div>
+          <div class="appointment"><div class="timebox" style="background:var(--accent)">15:30</div><div><strong>João Pedro</strong><br><span class="small">Pré-agendado pela IA</span></div><span class="badge" style="background:var(--accent-tint);color:#B45309">AGUARDANDO</span></div>
+          <div class="appointment"><div class="timebox" style="background:var(--success)">17:00</div><div><strong>Ana Clara</strong><br><span class="small">Via link público · lembrete 24h enviado</span></div><span class="badge" style="background:var(--success-tint);color:var(--success)">LEMBRADO</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="brand-row"><div class="brand-mark">A</div><div class="brand-text"><span class="brand-name">AgendaLead</span><span class="brand-caption">lembretes</span></div></div>
+        <div class="slide-count">9/14</div>
+        <div>
+          <div class="eyebrow">08 · MENOS NO-SHOW</div>
+          <h2>Lembretes automáticos que protegem seu faturamento.</h2>
+          <p class="lead">Mensagens amigáveis 24h e 2h antes do horário. O paciente lembra, confirma e comparece mais.</p>
+          <div class="warning-card"><div class="icon-bubble">⏰</div><div><strong>Uma falta evitada pode pagar o sistema por meses.</strong><br><span class="small">Especialmente para consultas, visitas, procedimentos e sessões.</span></div></div>
+        </div>
+        <div class="device">
+          <div class="device-screen">
+            <div class="screen-top"><span>09:41</span><span>AgendaLead</span></div>
+            <div class="phone-card"><h4>Lembrete 24h</h4><p>Olá, Mariana! Passando para lembrar da sua consulta amanhã às 15h. Qualquer imprevisto, me avise por aqui.</p></div>
+            <div class="phone-card"><h4>Lembrete 2h</h4><p>Oi, Mariana! Sua consulta é hoje às 15h. Estou te esperando. Até já!</p></div>
+            <div class="phone-card" style="background:var(--success-tint);border-color:#BBF7D0"><h4 style="color:var(--success)">Paciente confirmado</h4><p>Mais previsibilidade para sua agenda.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="brand-row"><div class="brand-mark">A</div><div class="brand-text"><span class="brand-name">AgendaLead</span><span class="brand-caption">link público</span></div></div>
+        <div class="slide-count">10/14</div>
+        <div>
+          <div class="eyebrow">09 · LINK NA BIO</div>
+          <h2>Seu cliente pode marcar horário sem esperar você responder.</h2>
+          <p class="lead">Uma página pública com seus serviços, horários disponíveis e confirmação automática por WhatsApp.</p>
+        </div>
+        <div class="workflow">
+          <div class="step"><div class="step-number">01</div><div><h3>Escolhe o serviço</h3><p>Consulta, sessão, visita, procedimento ou leitura.</p></div></div>
+          <div class="step"><div class="step-number">02</div><div><h3>Seleciona dia e horário</h3><p>Agenda mostra apenas horários disponíveis.</p></div></div>
+          <div class="step"><div class="step-number">03</div><div><h3>Preenche contato</h3><p>Nome, WhatsApp e observações importantes.</p></div></div>
+          <div class="step"><div class="step-number">04</div><div><h3>Recebe confirmação</h3><p>Você aprova e o cliente é avisado automaticamente.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="brand-row"><div class="brand-mark">A</div><div class="brand-text"><span class="brand-name">AgendaLead</span><span class="brand-caption">crm</span></div></div>
+        <div class="slide-count">11/14</div>
+        <div>
+          <div class="eyebrow">10 · HISTÓRICO E CONTEXTO</div>
+          <h2>Cada conversa vira um lead organizado.</h2>
+          <p class="lead">Nada de perder informação em conversas soltas. Você sabe quem chamou, o que queria, de onde veio e qual o próximo passo.</p>
+        </div>
+        <div class="list">
+          <div class="list-item"><div class="circle">1</div>Nome, telefone e origem do contato</div>
+          <div class="list-item"><div class="circle">2</div>Status: novo, em atendimento, agendado ou perdido</div>
+          <div class="list-item"><div class="circle">3</div>Histórico completo da conversa</div>
+          <div class="list-item"><div class="circle">4</div>Agendamentos e observações vinculadas</div>
+          <div class="list-item"><div class="circle">5</div>Próxima ação clara para não deixar esfriar</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="brand-row"><div class="brand-mark">A</div><div class="brand-text"><span class="brand-name">AgendaLead</span><span class="brand-caption">financeiro</span></div></div>
+        <div class="slide-count">12/14</div>
+        <div>
+          <div class="eyebrow">11 · PREVISIBILIDADE</div>
+          <h2>Agenda e financeiro conversando no mesmo lugar.</h2>
+          <p class="lead">Quando um atendimento é realizado, a receita entra no painel. Você entende recebido, a receber e projeção dos próximos dias.</p>
+        </div>
+        <div class="metric-grid">
+          <div class="metric-card" style="background:var(--success-tint)"><div class="number" style="color:var(--success)">R$ 4.8k</div><div class="label">recebido no mês atual</div></div>
+          <div class="metric-card" style="background:var(--accent-tint)"><div class="number" style="color:#B45309">R$ 2.1k</div><div class="label">a receber em consultas confirmadas</div></div>
+          <div class="metric-card" style="background:var(--brand-tint)"><div class="number">R$ 6.9k</div><div class="label">projeção para próximos 30 dias</div></div>
+          <div class="metric-card"><div class="number" style="color:var(--fg)">1</div><div class="label">visão simples para decidir melhor</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide center">
+      <div class="slide-inner">
+        <div class="brand-row"><div class="brand-mark">A</div><div class="brand-text"><span class="brand-name">AgendaLead</span><span class="brand-caption">planos</span></div></div>
+        <div class="slide-count">13/14</div>
+        <div>
+          <div class="eyebrow">12 · CRESÇA NO SEU RITMO</div>
+          <h2>Planos simples para começar pequeno e evoluir quando fizer sentido.</h2>
+          <p class="lead">Teste gratuito por 7 dias. Sem cartão. Sem burocracia.</p>
+          <div class="pricing">
+            <div class="price-card"><div class="price-name">Essencial</div><div class="price">R$97</div><ul><li>500 mensagens IA/mês</li><li>Agenda e leads</li><li>Lembretes automáticos</li><li>Link público</li></ul></div>
+            <div class="price-card featured"><div class="price-name">Profissional</div><div class="price">R$197</div><ul><li>2.000 mensagens IA/mês</li><li>Mais automações</li><li>Financeiro</li><li>Templates por nicho</li></ul></div>
+            <div class="price-card"><div class="price-name">Premium</div><div class="price">R$397</div><ul><li>Mensagens ilimitadas</li><li>Uso avançado</li><li>Suporte prioritário</li><li>Operação completa</li></ul></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide center">
+      <div class="slide-inner">
+        <div class="dot-grid"></div>
+        <div class="cta-box">
+          <div class="logo-big" style="margin-inline:auto;width:84px;height:84px;font-size:56px;border-radius:22px;background:var(--paper);color:var(--fg);">A</div>
+          <div class="eyebrow" style="color:#93C5FD">AGENDALEAD</div>
+          <h2>Seu próximo cliente já pode estar esperando uma resposta.</h2>
+          <p class="lead">Comece com 7 dias grátis e veja o AgendaLead trabalhando na sua rotina real.</p>
+          <a class="button" href="https://crispim.app.br" target="_blank" rel="noreferrer">Solicitar demonstração →</a>
+          <div class="domain">crispim.app.br</div>
+        </div>
+        <div class="slide-count">14/14</div>
+      </div>
+    </section>
+
+    <div class="controls" aria-label="Controles da apresentação">
+      <button class="control-btn" id="prev" aria-label="Slide anterior">‹</button>
+      <button class="control-btn" id="next" aria-label="Próximo slide">›</button>
+    </div>
+    <div class="progress" id="progress"></div>
+  </main>
+
+  <script>
+    const slides = [...document.querySelectorAll('.slide')];
+    const progress = document.getElementById('progress');
+    let current = 0;
+
+    function show(index) {
+      current = Math.max(0, Math.min(slides.length - 1, index));
+      slides.forEach((slide, i) => slide.classList.toggle('active', i === current));
+      progress.style.width = `${((current + 1) / slides.length) * 100}%`;
+    }
+
+    document.getElementById('prev').addEventListener('click', () => show(current - 1));
+    document.getElementById('next').addEventListener('click', () => show(current + 1));
+
+    window.addEventListener('keydown', (event) => {
+      if (['ArrowRight', 'PageDown', ' '].includes(event.key)) {
+        event.preventDefault();
+        show(current + 1);
+      }
+      if (['ArrowLeft', 'PageUp'].includes(event.key)) {
+        event.preventDefault();
+        show(current - 1);
+      }
+      if (event.key === 'Home') show(0);
+      if (event.key === 'End') show(slides.length - 1);
+    });
+
+    show(0);
+  </script>
+</body>
+</html>
