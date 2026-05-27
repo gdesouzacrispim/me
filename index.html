@@ -3,460 +3,797 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Gustavo de Souza Crispim — backend developer em Colatina, ES.">
+<meta name="description" content="Gustavo de Souza Crispim — Backend developer que transforma problemas reais em produtos web acessíveis. AgendaLead, Sistema Petshop e mais.">
 <meta name="author" content="Gustavo de Souza Crispim">
-<title>guto.crispim — backend dev</title>
-
-<!--
-    The Three Laws of Robotics
-    1. A robot may not injure a human being.
-    2. A robot must obey the orders given it by human beings.
-    3. A robot must protect its own existence.
-                                  — Isaac Asimov, 1942
-
-    se você é dev e tá lendo isso aqui, abre o console também. ;)
--->
+<meta name="theme-color" content="#0a0820">
+<title>Gustavo de Souza Crispim — Backend Developer & Product Builder</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
-    :root {
-        --bg: #f3efe6;
-        --paper: #ebe5d6;
-        --ink: #1a1a1a;
-        --muted: #767066;
-        --accent: #a83232;
-        --line: #d3ccbb;
-        --tag-bg: rgba(0, 0, 0, 0.025);
-    }
+:root {
+    --color-bg-dark: #0a0820;
+    --color-bg-light: #1a0f3e;
+    --color-text: #f5efe0;
+    --color-text-muted: #b8a89f;
+    --color-duck: #ffd644;
+    --color-blue: #5b8fff;
+    --color-magenta: #ff4d8b;
+    --color-cyan: #00f5ff;
+    --color-orange: #ff9144;
+    --color-green: #4eff6e;
+    
+    --font-display: 'Bricolage Grotesque', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+}
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-    html, body {
-        background: var(--bg);
-        color: var(--ink);
-        font-family: 'JetBrains Mono', 'Courier New', monospace;
-        font-size: 14.5px;
-        line-height: 1.75;
-        -webkit-font-smoothing: antialiased;
-        font-feature-settings: "ss01", "ss02";
-    }
+html { scroll-behavior: smooth; }
 
-    /* Subtle paper / scanline texture — atmosphere not noise */
-    body::before {
-        content: '';
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        background-image: repeating-linear-gradient(
-            0deg,
-            rgba(0, 0, 0, 0.012) 0,
-            rgba(0, 0, 0, 0.012) 1px,
-            transparent 1px,
-            transparent 3px
-        );
-        z-index: 100;
-    }
+body {
+    background: linear-gradient(135deg, var(--color-bg-dark) 0%, var(--color-bg-light) 100%);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    overflow-x: hidden;
+}
 
-    main {
-        max-width: 620px;
-        margin: 0 auto;
-        padding: 72px 28px 100px;
-        position: relative;
-    }
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(1px 1px at 20% 30%, #eee 1px, transparent 1px),
+        radial-gradient(1px 1px at 60% 70%, #fff 1px, transparent 1px),
+        radial-gradient(1.5px 1.5px at 50% 50%, #ddd 1px, transparent 1px),
+        radial-gradient(1px 1px at 80% 10%, #fff 1px, transparent 1px),
+        radial-gradient(2px 2px at 90% 60%, #efefef 1px, transparent 1px);
+    background-repeat: repeat;
+    background-size: 200% 200%, 150% 150%, 180% 180%, 220% 220%, 250% 250%;
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 0;
+}
 
-    /* ── header ─────────────────────────────────────── */
-    header {
-        border-bottom: 1px dashed var(--line);
-        padding-bottom: 22px;
-        margin-bottom: 32px;
-    }
+main {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
 
-    .prompt {
-        color: var(--muted);
-        font-size: 0.85rem;
-    }
+/* Hero */
+.hero {
+    margin-bottom: 100px;
+    padding: 80px 40px;
+    background: linear-gradient(135deg, rgba(91, 184, 255, 0.1) 0%, rgba(255, 77, 139, 0.1) 100%);
+    border: 1px solid rgba(255, 212, 68, 0.2);
+    border-radius: 24px;
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+}
 
-    .prompt::before {
-        content: '$ ';
-        color: var(--accent);
-        font-weight: 700;
-    }
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(91, 184, 255, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
 
-    h1 {
-        font-size: 1.45rem;
-        font-weight: 700;
-        margin-top: 8px;
-        letter-spacing: -0.01em;
-    }
+.hero-header { position: relative; z-index: 2; margin-bottom: 40px; }
 
-    .cursor {
-        display: inline-block;
-        width: 0.55em;
-        height: 1.05em;
-        background: var(--ink);
-        vertical-align: -0.15em;
-        margin-left: 6px;
-        animation: blink 1.05s steps(2, end) infinite;
-    }
+.hero-location {
+    display: inline-block;
+    padding: 6px 12px;
+    background: rgba(255, 212, 68, 0.1);
+    border: 1px solid rgba(255, 212, 68, 0.3);
+    border-radius: 20px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-duck);
+    margin-bottom: 20px;
+}
 
-    @keyframes blink { 50% { opacity: 0; } }
+.hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, var(--color-text) 0%, var(--color-cyan) 50%, var(--color-blue) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
 
-    .subtitle {
-        color: var(--muted);
-        margin-top: 6px;
-        font-size: 0.88rem;
-    }
+.hero-position {
+    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+    color: var(--color-cyan);
+    font-weight: 500;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
 
-    /* ── sections ───────────────────────────────────── */
-    section { margin-top: 36px; }
+.hero-subtitle {
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+    margin-bottom: 40px;
+    max-width: 600px;
+}
 
-    section h2 {
-        font-size: 0.78rem;
-        font-weight: 700;
-        text-transform: lowercase;
-        color: var(--accent);
-        margin-bottom: 14px;
-        letter-spacing: 0.06em;
-    }
+.hero-cta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+}
 
-    section h2::before {
-        content: '> ';
-        color: var(--muted);
-        font-weight: 400;
-    }
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
 
-    p { margin-bottom: 12px; max-width: 60ch; }
+.btn.primary {
+    background: linear-gradient(135deg, var(--color-duck) 0%, var(--color-orange) 100%);
+    color: #000;
+}
 
-    .comment {
-        color: var(--muted);
-        font-style: italic;
-    }
+.btn.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 40px rgba(255, 212, 68, 0.3);
+}
 
-    /* ── now playing block ──────────────────────────── */
-    .now {
-        border-left: 2px solid var(--accent);
-        padding: 4px 0 4px 18px;
-        background: var(--paper);
-        background-clip: padding-box;
-    }
+.btn.secondary {
+    background: rgba(91, 184, 255, 0.1);
+    color: var(--color-blue);
+    border-color: var(--color-blue);
+}
 
-    .now-row {
-        display: grid;
-        grid-template-columns: 92px 1fr;
-        gap: 10px;
-        margin-bottom: 4px;
-        font-size: 0.92rem;
-    }
+.btn.secondary:hover {
+    background: rgba(91, 184, 255, 0.2);
+    transform: translateY(-2px);
+}
 
-    .now-row .label {
-        color: var(--accent);
-        font-weight: 500;
-    }
+.hero-duck-container {
+    position: relative;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-    .now-row .label::before {
-        content: '[';
-        color: var(--muted);
-        font-weight: 400;
-    }
-    .now-row .label::after {
-        content: ']';
-        color: var(--muted);
-        font-weight: 400;
-    }
+.hero-duck {
+    width: 250px;
+    height: 250px;
+    opacity: 0.95;
+    filter: drop-shadow(0 20px 40px rgba(255, 212, 68, 0.2));
+    animation: float 6s ease-in-out infinite;
+}
 
-    /* ── stack tags ─────────────────────────────────── */
-    .tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-    }
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
 
-    .tag {
-        padding: 2px 8px;
-        border: 1px solid var(--line);
-        background: var(--tag-bg);
-        font-size: 0.78rem;
-        color: var(--muted);
-        white-space: nowrap;
-    }
+/* Sections */
+section { margin-bottom: 80px; }
 
-    .tag:hover {
-        border-color: var(--accent);
-        color: var(--accent);
-    }
+section h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+    font-weight: 700;
+    margin-bottom: 40px;
+    color: var(--color-text);
+}
 
-    /* ── projects ───────────────────────────────────── */
-    .project {
-        display: flex;
-        gap: 12px;
-        align-items: baseline;
-        margin-bottom: 8px;
-    }
+section h2::before {
+    content: '→ ';
+    color: var(--color-duck);
+    margin-right: 10px;
+}
 
-    .project::before {
-        content: '─';
-        color: var(--muted);
-        flex-shrink: 0;
-    }
+/* What */
+.what {
+    background: linear-gradient(135deg, rgba(91, 184, 255, 0.05) 0%, rgba(0, 245, 255, 0.05) 100%);
+    padding: 60px 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(91, 184, 255, 0.1);
+}
 
-    /* ── links / icons ──────────────────────────────── */
-    a {
-        color: var(--ink);
-        text-decoration: underline;
-        text-decoration-thickness: 1px;
-        text-underline-offset: 3px;
-        text-decoration-color: var(--line);
-        transition: color 0.15s, text-decoration-color 0.15s;
-    }
+.what-intro {
+    font-size: 1.125rem;
+    color: var(--color-cyan);
+    font-weight: 600;
+    margin-bottom: 30px;
+}
 
-    a:hover {
-        color: var(--accent);
-        text-decoration-color: var(--accent);
-    }
+.what-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
 
-    .links {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
+.what-item {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 3px solid var(--color-duck);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
 
-    .links a {
-        display: inline-flex;
-        align-items: center;
-        gap: 12px;
-        text-decoration: none;
-        width: fit-content;
-        padding: 2px 0;
-    }
+.what-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateX(8px);
+}
 
-    .links a .arrow {
-        color: var(--muted);
-        opacity: 0;
-        transform: translateX(-4px);
-        transition: opacity 0.15s, transform 0.15s;
-    }
+.what-item strong {
+    color: var(--color-duck);
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
 
-    .links a:hover .arrow {
-        opacity: 1;
-        transform: translateX(0);
-        color: var(--accent);
-    }
+/* Projects */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
 
-    .links svg {
-        width: 16px;
-        height: 16px;
-        flex-shrink: 0;
-        color: var(--ink);
-        transition: color 0.15s;
-    }
+.project-card {
+    background: linear-gradient(135deg, rgba(255, 212, 68, 0.05) 0%, rgba(91, 184, 255, 0.05) 100%);
+    border: 1px solid rgba(255, 212, 68, 0.2);
+    border-radius: 16px;
+    padding: 32px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
 
-    .links a:hover svg { color: var(--accent); }
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
 
-    .link-label {
-        font-weight: 500;
-    }
+.project-card:hover::before { left: 100%; }
 
-    .link-handle {
-        color: var(--muted);
-        font-size: 0.85rem;
-    }
+.project-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255, 212, 68, 0.4);
+    box-shadow: 0 20px 50px rgba(255, 212, 68, 0.15);
+}
 
-    /* ── footer ─────────────────────────────────────── */
-    footer {
-        margin-top: 64px;
-        padding-top: 22px;
-        border-top: 1px dashed var(--line);
-        color: var(--muted);
-        font-size: 0.76rem;
-    }
+.project-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: linear-gradient(135deg, var(--color-green), var(--color-cyan));
+    color: #000;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+}
 
-    .foot-row {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 8px;
-    }
+.project-badge.wip {
+    background: linear-gradient(135deg, var(--color-magenta), var(--color-orange));
+}
 
-    .ascii {
-        white-space: pre;
-        line-height: 1.15;
-        color: var(--muted);
-        font-size: 0.72rem;
-        margin-top: 28px;
-        opacity: 0.65;
-        text-align: center;
-    }
+.project-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--color-text);
+}
 
-    /* ── responsive ─────────────────────────────────── */
-    @media (max-width: 480px) {
-        main { padding: 48px 20px 72px; }
-        body { font-size: 13.5px; }
-        h1 { font-size: 1.2rem; }
-        .now-row { grid-template-columns: 80px 1fr; gap: 8px; }
-    }
+.project-problem {
+    font-size: 0.875rem;
+    color: var(--color-duck);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
 
-    /* selection */
-    ::selection {
-        background: var(--accent);
-        color: var(--bg);
-    }
+.project-desc {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.tag {
+    padding: 4px 10px;
+    background: rgba(91, 184, 255, 0.1);
+    border: 1px solid rgba(91, 184, 255, 0.3);
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-blue);
+}
+
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-cyan);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.project-link:hover {
+    color: var(--color-duck);
+    gap: 12px;
+}
+
+/* Experience */
+.experience-card {
+    background: linear-gradient(135deg, rgba(91, 184, 255, 0.1) 0%, rgba(255, 77, 139, 0.05) 100%);
+    border: 1px solid rgba(91, 184, 255, 0.2);
+    border-radius: 16px;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.experience-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(91, 184, 255, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.experience-header {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 20px;
+}
+
+.experience-company {
+    font-size: 0.875rem;
+    color: var(--color-duck);
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.experience-role {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-top: 8px;
+}
+
+.experience-desc {
+    position: relative;
+    z-index: 2;
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    line-height: 1.8;
+}
+
+.experience-skills {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+/* Manifesto */
+.manifesto {
+    background: linear-gradient(135deg, rgba(255, 212, 68, 0.1) 0%, rgba(255, 77, 139, 0.1) 100%);
+    padding: 80px 40px;
+    border-radius: 20px;
+    border: 2px solid rgba(255, 212, 68, 0.3);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.manifesto::before {
+    content: '✦';
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 2rem;
+    color: var(--color-duck);
+    opacity: 0.3;
+}
+
+.manifesto::after {
+    content: '✦';
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 2rem;
+    color: var(--color-duck);
+    opacity: 0.3;
+}
+
+.manifesto-quote {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    font-weight: 700;
+    color: var(--color-duck);
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.manifesto-subtitle {
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+/* Currently */
+.currently {
+    background: linear-gradient(135deg, rgba(0, 245, 255, 0.05) 0%, rgba(91, 184, 255, 0.05) 100%);
+    padding: 60px 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 245, 255, 0.2);
+}
+
+.cockpit {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.panel {
+    background: linear-gradient(135deg, rgba(91, 184, 255, 0.1) 0%, rgba(0, 245, 255, 0.05) 100%);
+    border: 1px solid rgba(0, 245, 255, 0.3);
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-cyan), transparent);
+}
+
+.panel-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-cyan);
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.panel-value {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    color: var(--color-text);
+    font-weight: 500;
+}
+
+/* Stack */
+.stack-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.stack-tag {
+    padding: 8px 16px;
+    background: linear-gradient(135deg, rgba(91, 184, 255, 0.1), rgba(0, 245, 255, 0.05));
+    border: 1px solid rgba(0, 245, 255, 0.3);
+    border-radius: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--color-blue);
+    transition: all 0.3s ease;
+}
+
+.stack-tag:hover {
+    background: linear-gradient(135deg, rgba(91, 184, 255, 0.2), rgba(0, 245, 255, 0.1));
+    border-color: var(--color-cyan);
+    color: var(--color-cyan);
+}
+
+/* Footer */
+footer {
+    margin-top: 100px;
+    padding: 60px 40px;
+    border-top: 1px solid rgba(255, 212, 68, 0.2);
+    text-align: center;
+}
+
+.footer-duck { font-size: 2rem; margin-bottom: 20px; }
+
+.footer-text {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    margin-bottom: 20px;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.footer-link {
+    color: var(--color-cyan);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.footer-link:hover { color: var(--color-duck); }
+
+.footer-credit {
+    margin-top: 30px;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    main { padding: 40px 16px; }
+    .hero { padding: 40px 20px; margin-bottom: 60px; }
+    .hero-duck-container { height: 200px; }
+    .hero-duck { width: 180px; height: 180px; }
+    section { margin-bottom: 60px; }
+    .what, .currently, .manifesto { padding: 40px 20px; }
+    .experience-card { padding: 30px 20px; }
+    .projects-grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+
+a { color: inherit; }
 </style>
 </head>
 <body>
+
 <main>
+    <section class="hero">
+        <div class="hero-header">
+            <div class="hero-location">🌌 Colatina, ES · BR</div>
+            <h1>Gustavo de Souza Crispim</h1>
+            <p class="hero-position">Backend Developer que transforma problemas reais em produtos web acessíveis</p>
+            <p class="hero-subtitle">@TOTVS de dia • Construo produtos próprios à noite • Tudo rodando em produção</p>
+        </div>
 
-    <header>
-        <div class="prompt">whoami</div>
-        <h1>gustavo de souza crispim<span class="cursor"></span></h1>
-        <div class="subtitle">backend developer @ totvs · colatina, es — br</div>
-    </header>
+        <div class="hero-cta">
+            <a href="#projects" class="btn primary">Ver Projetos</a>
+            <a href="https://github.com/gdesouzacrispim" target="_blank" rel="noopener" class="btn secondary">GitHub</a>
+            <a href="https://www.linkedin.com/in/gustavo-de-souza-crispim-4b8685178/" target="_blank" rel="noopener" class="btn secondary">LinkedIn</a>
+        </div>
 
-    <!-- ─── about ────────────────────────────────────── -->
-    <section>
-        <h2>about</h2>
-        <p>
-            Formado pela <a href="https://www.udesc.br" target="_blank" rel="noopener">UDESC</a> em Santa Catarina,
-            hoje escrevo código backend na <a href="https://www.totvs.com" target="_blank" rel="noopener">TOTVS</a>.
-            <span class="comment">// código que roda em silêncio em milhares de empresas.</span>
-        </p>
-        <p>
-            Fora do horário comercial, construo sites pequenos pra vender —
-            soluções enxutas pra negócios reais. Um dos vários por vir.
-        </p>
+        <div class="hero-duck-container">
+            <svg class="hero-duck" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="100" cy="110" rx="45" ry="50" fill="#ffd644"/>
+                <circle cx="100" cy="60" r="30" fill="#ffd644"/>
+                <ellipse cx="125" cy="60" rx="18" ry="12" fill="#ff9144"/>
+                <circle cx="108" cy="52" r="4" fill="#1a0f3e"/>
+                <circle cx="100" cy="60" r="45" fill="none" stroke="rgba(0, 245, 255, 0.6)" stroke-width="2"/>
+                <ellipse cx="85" cy="45" rx="12" ry="18" fill="rgba(255, 255, 255, 0.3)"/>
+                <line x1="100" y1="15" x2="100" y2="-5" stroke="#ffd644" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="100" cy="-5" r="4" fill="#ffd644"/>
+                <circle cx="100" cy="-5" r="2" fill="rgba(255, 255, 255, 0.6)"/>
+            </svg>
+        </div>
     </section>
 
-    <!-- ─── currently ────────────────────────────────── -->
+    <section class="what">
+        <h2>O que eu faço</h2>
+        <p class="what-intro">Construo coisas que rodam em produção. Do backend ao frontend, da arquitetura ao produto final.</p>
+        <div class="what-list">
+            <div class="what-item"><strong>🔧 Backend & APIs</strong>Java, SQL, Docker, integrações e sistemas que não caem</div>
+            <div class="what-item"><strong>🌐 Sistemas Web</strong>Desde CRUD até aplicações complexas com IA integrada</div>
+            <div class="what-item"><strong>⚙️ Automações</strong>WhatsApp, agendas, workflows — tudo rodando 24/7</div>
+            <div class="what-item"><strong>🤖 Com IA</strong>Integrações com IA generativa quando fizer sentido</div>
+            <div class="what-item"><strong>💼 Produtos SaaS</strong>Do MVP ao crescimento — AgendaLead, Sistema Petshop e mais</div>
+            <div class="what-item"><strong>🎯 Para pequenos negócios</strong>Preço justo, suporte real, código que dura</div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>Projetos em Produção</h2>
+        <div class="projects-grid">
+            <article class="project-card">
+                <div class="project-badge">Ativo</div>
+                <h3>AgendaLead</h3>
+                <p class="project-problem">Problema: profissional perde lead por não responder a tempo</p>
+                <p class="project-desc">IA que conversa no WhatsApp e marca horário direto na agenda. Pra nutri, psicólogo, esteticista, personal, barbearia, petshop — basicamente qualquer profissional autônomo que não quer perder cliente.</p>
+                <div class="project-tags">
+                    <span class="tag">TypeScript</span>
+                    <span class="tag">Supabase</span>
+                    <span class="tag">Vercel</span>
+                    <span class="tag">IA Generativa</span>
+                </div>
+                <a href="https://crispim.app.br" target="_blank" rel="noopener" class="project-link">Acessar → crispim.app.br</a>
+            </article>
+
+            <article class="project-card">
+                <div class="project-badge">Ativo</div>
+                <h3>Sistema Petshop</h3>
+                <p class="project-problem">Problema: petshop gerencia agenda, estoque e financeiro em 3 apps diferentes</p>
+                <p class="project-desc">Gestão completa num lugar só: agenda, vendas, estoque, financeiro. Roda no balcão ou em casa. Simples, rápido, funciona.</p>
+                <div class="project-tags">
+                    <span class="tag">React</span>
+                    <span class="tag">PostgreSQL</span>
+                    <span class="tag">Docker</span>
+                    <span class="tag">Vercel</span>
+                </div>
+                <a href="https://gdesouzacrispim.github.io/me/pet" target="_blank" rel="noopener" class="project-link">Acessar → GitHub Pages</a>
+            </article>
+
+            <article class="project-card">
+                <div class="project-badge wip">Em Construção</div>
+                <h3>?</h3>
+                <p class="project-problem">Problema: seu negócio tem um problema específico</p>
+                <p class="project-desc">Terceiro produto na fila. Pode ser algo que você precisa. Se tiver uma ideia, vem conversar.</p>
+                <div class="project-tags"><span class="tag">?</span></div>
+                <a href="https://www.linkedin.com/in/gustavo-de-souza-crispim-4b8685178/" target="_blank" rel="noopener" class="project-link">Conversar →</a>
+            </article>
+        </div>
+    </section>
+
     <section>
-        <h2>currently</h2>
-        <div class="now">
-            <div class="now-row">
-                <span class="label">reading</span>
-                <span>Fundação · <span class="comment">Isaac Asimov</span></span>
+        <h2>Experiência</h2>
+        <article class="experience-card">
+            <div class="experience-header">
+                <div class="experience-company">TOTVS</div>
+                <h3 class="experience-role">Backend Developer</h3>
             </div>
-            <div class="now-row">
-                <span class="label">listening</span>
-                <span>Xadrez Verbal &nbsp;&middot;&nbsp; Central 3</span>
+            <p class="experience-desc">Desenvolvo sistemas backend que rodam em milhares de empresas brasileiras. Java, APIs REST, integrações com sistemas legados, arquitetura escalável, banco de dados robusto. Código que não pode falhar.</p>
+            <div class="experience-skills">
+                <span class="tag">Java</span>
+                <span class="tag">SQL</span>
+                <span class="tag">APIs REST</span>
+                <span class="tag">Docker</span>
+                <span class="tag">Linux</span>
+                <span class="tag">Fluig</span>
+                <span class="tag">Integrações</span>
             </div>
-            <div class="now-row">
-                <span class="label">recently</span>
-                <span>Artemis · <span class="comment">Andy Weir</span></span>
+        </article>
+    </section>
+
+    <section class="manifesto">
+        <p class="manifesto-quote">Software acessível pra gente real.</p>
+        <p class="manifesto-subtitle">Construo soluções que pequenos negócios conseguem usar, pagar e entender. Sem jargão desnecessário. Sem lock-in. Código que serve.</p>
+    </section>
+
+    <section class="currently">
+        <h2>Currently</h2>
+        <div class="cockpit">
+            <div class="panel">
+                <span class="panel-label">🎓 Lendo</span>
+                <span class="panel-value">Fundação · Asimov</span>
             </div>
-            <div class="now-row">
-                <span class="label">watching</span>
-                <span>The Big Bang Theory <span class="comment">// bazinga.</span></span>
+            <div class="panel">
+                <span class="panel-label">🎧 Ouvindo</span>
+                <span class="panel-value">Xadrez Verbal · Central 3</span>
+            </div>
+            <div class="panel">
+                <span class="panel-label">🚀 Recente</span>
+                <span class="panel-value">Artemis · Andy Weir</span>
+            </div>
+            <div class="panel">
+                <span class="panel-label">📺 Assistindo</span>
+                <span class="panel-value">The Big Bang Theory</span>
             </div>
         </div>
     </section>
 
-    <!-- ─── projects ─────────────────────────────────── -->
     <section>
-        <h2>projects</h2>
-        <div class="project">
-            <a href="https://gdesouzacrispim.github.io/me/pet">
-                <span><strong>petshop</strong> &nbsp;<span class="comment">— Sitema de Gestão </span></span>
-            </a>
-        </div>
-        <div class="project">
-            <a href="https://www.crispim.app.br/">
-                <span><strong>Agenda Lead</strong> &nbsp;<span class="comment"> | Para Profissionais  </span></span>
-            </a>
-        </div>
-        <div class="project">
-            <a href="https://gdesouzacrispim.github.io/me/agendalead">
-                <span><strong>Agenda Lead</strong> &nbsp;<span class="comment"> | Proposta Comercial  </span></span>
-            </a>            
-        </div>
-        <div class="project">
-            <span><span class="comment">// + projetos a caminho. fica de olho no github.</span></span>
+        <h2>Stack</h2>
+        <div class="stack-tags">
+            <span class="stack-tag">Java</span>
+            <span class="stack-tag">JavaScript</span>
+            <span class="stack-tag">TypeScript</span>
+            <span class="stack-tag">SQL</span>
+            <span class="stack-tag">PostgreSQL</span>
+            <span class="stack-tag">Supabase</span>
+            <span class="stack-tag">React</span>
+            <span class="stack-tag">Docker</span>
+            <span class="stack-tag">Git</span>
+            <span class="stack-tag">Linux</span>
+            <span class="stack-tag">Vercel</span>
+            <span class="stack-tag">REST APIs</span>
+            <span class="stack-tag">HTML/CSS</span>
         </div>
     </section>
 
-    <!-- ─── stack ────────────────────────────────────── -->
-    <!-- edite as tags abaixo conforme as ferramentas que você quer destacar -->
-    <section>
-        <h2>stack</h2>
-        <div class="tags">
-            <span class="tag">java</span>
-            <span class="tag">sql</span>
-            <span class="tag">git</span>
-            <span class="tag">linux</span>
-            <span class="tag">docker</span>
-            <span class="tag">html/css</span>
-            <span class="tag">javascript</span>
-            <span class="tag">vim</span>
-        </div>
-    </section>
-
-    <!-- ─── elsewhere ────────────────────────────────── -->
-    <section>
-        <h2>elsewhere</h2>
-        <div class="links">
-            <a href="https://github.com/gdesouzacrispim" target="_blank" rel="noopener" aria-label="GitHub">
-                <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                    <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38v-1.34c-2.22.48-2.69-1.07-2.69-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.7 7.7 0 014 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0016 8c0-4.42-3.58-8-8-8z"/>
-                </svg>
-                <span class="link-label">github</span>
-                <span class="link-handle">@gdesouzacrispim</span>
-                <span class="arrow">→</span>
-            </a>
-
-            <a href="https://www.linkedin.com/in/gustavo-de-souza-crispim-4b8685178/" target="_blank" rel="noopener" aria-label="LinkedIn">
-                <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                    <path d="M13.6 13.6h-2.37V9.9c0-.88-.02-2.02-1.23-2.02-1.23 0-1.42.96-1.42 1.96v3.76H6.21V6h2.27v1.04h.03c.32-.6 1.09-1.23 2.24-1.23 2.4 0 2.85 1.58 2.85 3.63v4.16zM3.54 4.95a1.37 1.37 0 110-2.74 1.37 1.37 0 010 2.74zM4.73 13.6H2.36V6h2.37v7.6zM14.78 0H1.22C.55 0 0 .54 0 1.2v13.6c0 .66.55 1.2 1.22 1.2h13.56c.67 0 1.22-.54 1.22-1.2V1.2C16 .54 15.45 0 14.78 0z"/>
-                </svg>
-                <span class="link-label">linkedin</span>
-                <span class="link-handle">/in/gustavo-de-souza-crispim</span>
-                <span class="arrow">→</span>
-            </a>
-
-            <a href="https://www.instagram.com/gustavoscrispim/" target="_blank" rel="noopener" aria-label="Instagram">
-                <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                    <path d="M8 1.44c2.13 0 2.39.01 3.23.05.78.04 1.2.17 1.49.28.37.14.64.32.92.6.28.28.46.55.6.92.11.28.24.7.28 1.49.04.84.05 1.1.05 3.23s-.01 2.39-.05 3.23c-.04.78-.17 1.2-.28 1.49-.14.37-.32.64-.6.92a2.5 2.5 0 01-.92.6c-.28.11-.71.24-1.49.28-.84.04-1.1.05-3.23.05s-2.39-.01-3.23-.05c-.78-.04-1.2-.17-1.49-.28a2.5 2.5 0 01-.92-.6 2.5 2.5 0 01-.6-.92c-.11-.28-.24-.71-.28-1.49C1.45 10.39 1.44 10.13 1.44 8s.01-2.39.05-3.23c.04-.78.17-1.2.28-1.49.14-.37.32-.64.6-.92.28-.28.55-.46.92-.6.28-.11.71-.24 1.49-.28C5.61 1.45 5.87 1.44 8 1.44M8 0C5.83 0 5.56.01 4.7.05c-.85.04-1.44.18-1.95.37-.53.21-.98.48-1.42.93C.88 1.79.6 2.24.4 2.76.21 3.27.07 3.86.03 4.71.01 5.56 0 5.83 0 8s.01 2.44.05 3.3c.04.84.18 1.43.37 1.94.21.53.48.98.93 1.42.45.45.9.72 1.42.93.51.2 1.1.34 1.95.37.85.04 1.13.05 3.3.05s2.44-.01 3.3-.05c.84-.04 1.43-.18 1.94-.37.53-.21.98-.48 1.42-.93.45-.45.72-.9.93-1.42.2-.51.34-1.1.37-1.94.04-.86.05-1.13.05-3.3s-.01-2.44-.05-3.3c-.04-.84-.18-1.43-.37-1.94a3.92 3.92 0 00-.93-1.42 3.92 3.92 0 00-1.42-.93C12.73.21 12.14.07 11.3.03 10.44.01 10.17 0 8 0zm0 3.89a4.11 4.11 0 100 8.22 4.11 4.11 0 000-8.22zm0 6.78a2.67 2.67 0 110-5.34 2.67 2.67 0 010 5.34zm5.23-6.94a.96.96 0 11-1.92 0 .96.96 0 011.92 0z"/>
-                </svg>
-                <span class="link-label">instagram</span>
-                <span class="link-handle">@gustavoscrispim</span>
-                <span class="arrow">→</span>
-            </a>
-        </div>
-    </section>
-
-    <!-- ─── contact ──────────────────────────────────── -->
-    <section>
-        <h2>contact</h2>
-        <p class="comment">// resposta mais rápida via linkedin ↑</p>
-    </section>
-
-    <!-- ─── footer ───────────────────────────────────── -->
     <footer>
-        <div class="foot-row">
-            <span>© <span id="year">2026</span> guto · made with <strong>vim</strong> &amp; café</span>
-            <span>v0.42.0</span>
+        <div class="footer-duck">🦆</div>
+        <p class="footer-text">Pato de borracha é prático. Código também deveria ser.</p>
+        <div class="footer-links">
+            <a href="https://github.com/gdesouzacrispim" target="_blank" rel="noopener" class="footer-link">GitHub</a>
+            <a href="https://www.linkedin.com/in/gustavo-de-souza-crispim-4b8685178/" target="_blank" rel="noopener" class="footer-link">LinkedIn</a>
+            <a href="https://www.instagram.com/gustavoscrispim/" target="_blank" rel="noopener" class="footer-link">Instagram</a>
         </div>
-
-<pre class="ascii">
-   .::.
-  [ &#9822; ]   psychohistory says: keep building.
-   '··'
-</pre>
+        <p class="footer-credit">© <span id="year"></span> Gustavo de Souza Crispim · Built with HTML, CSS, JS & curiosity</p>
     </footer>
-
 </main>
 
 <script>
-    /* ── tiny scripts: year + dev easter egg ───────────────── */
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    /*  Hari Seldon would approve.
-        Open the console — pra quem chega até aqui. */
-    const css1 = 'font-family: monospace; font-size: 14px; color:#a83232; font-weight: 700;';
-    const css2 = 'font-family: monospace; color: #767066;';
-    console.log('%c> olá, dev.', css1);
-    console.log('%c  se você é fã de Asimov, sci-fi ou só curioso — tmj.', css2);
-    console.log('%c  github.com/gdesouzacrispim', css2);
-    console.log('%c  // bazinga.', css2);
+document.getElementById('year').textContent = new Date().getFullYear();
+const css1 = 'font-family: "JetBrains Mono", monospace; font-size: 14px; color: #ffd644; font-weight: 700;';
+const css2 = 'font-family: "JetBrains Mono", monospace; font-size: 13px; color: #b8a89f;';
+const css3 = 'font-family: "JetBrains Mono", monospace; font-size: 13px; color: #00f5ff;';
+console.log('%c🦆 Cosmic Rubber Duck Lab', css1);
+console.log('%cHouston, we have a rubber duck.', css2);
+console.log('%c', css2);
+console.log('%cgithub.com/gdesouzacrispim', css3);
+console.log('%c', css2);
+console.log('%cIf you can read this, you understand that details matter.', css2);
+console.log('%cKeep building.', css1);
 </script>
+
 </body>
 </html>
