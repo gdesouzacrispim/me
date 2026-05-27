@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Operação Estreito Minado — sátira política em formato de Campo Minado ambientada no Estreito de Ormuz." />
+  <title>OPERAÇÃO ESTREITO MINADO — Crise no Golfo</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23ffb000' stroke='%23061018' stroke-width='6'/><circle cx='50' cy='50' r='8' fill='%23061018'/></svg>" />
+</head>
+<body>
+
+  <!-- ============================================================
+       FUNDO ATMOSFÉRICO: mapa, varredura de radar, scanlines, grão
+       ============================================================ -->
+  <div class="atmosphere" aria-hidden="true">
+    <div class="atmo-map"></div>
+    <div class="atmo-tint"></div>
+    <div class="atmo-grid"></div>
+    <div class="atmo-radar"><div class="atmo-radar-sweep"></div></div>
+    <div class="atmo-scan"></div>
+    <div class="atmo-vignette"></div>
+    <div class="atmo-noise"></div>
+  </div>
+
+  <!-- ============================================================
+       FLASH VERMELHO + SHAKE OVERLAY (controlado por JS)
+       ============================================================ -->
+  <div id="flash-overlay" class="flash-overlay" aria-hidden="true"></div>
+
+  <!-- ============================================================
+       HUD SUPERIOR
+       ============================================================ -->
+  <header class="hud" id="hud" hidden>
+    <div class="hud-brand">
+      <svg class="hud-logo" viewBox="0 0 60 60" aria-hidden="true">
+        <circle cx="30" cy="30" r="26" fill="none" stroke="currentColor" stroke-width="2"/>
+        <circle cx="30" cy="30" r="14" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".7"/>
+        <circle cx="30" cy="30" r="3" fill="currentColor"/>
+        <line x1="30" y1="2" x2="30" y2="58" stroke="currentColor" stroke-width="1" opacity=".4"/>
+        <line x1="2" y1="30" x2="58" y2="30" stroke="currentColor" stroke-width="1" opacity=".4"/>
+      </svg>
+      <div>
+        <div class="hud-codename">OPERAÇÃO ESTREITO MINADO</div>
+        <div class="hud-subcode">CMD-OPS // GOLFO PÉRSICO // <span id="hud-diff-label">—</span></div>
+      </div>
+    </div>
+
+    <div class="hud-readouts">
+      <div class="readout">
+        <div class="readout-label">SCORE</div>
+        <div class="readout-value" id="readout-score">0</div>
+      </div>
+      <div class="readout">
+        <div class="readout-label">SEQUÊNCIA</div>
+        <div class="readout-value" id="readout-streak">×1</div>
+      </div>
+      <div class="readout">
+        <div class="readout-label">MINAS</div>
+        <div class="readout-value alert" id="readout-mines">0</div>
+      </div>
+      <div class="readout">
+        <div class="readout-label">TEMPO</div>
+        <div class="readout-value" id="readout-time">00:00</div>
+      </div>
+      <div class="readout">
+        <div class="readout-label">RECORDE</div>
+        <div class="readout-value gold" id="readout-best">—</div>
+      </div>
+    </div>
+
+    <div class="hud-actions">
+      <button class="btn-tactical" id="btn-restart" type="button">
+        <span class="btn-dot"></span>REINICIAR
+      </button>
+      <button class="btn-tactical ghost" id="btn-menu" type="button">MENU</button>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       ÁREA DE JOGO
+       ============================================================ -->
+  <main class="game-area" id="game-area" hidden>
+    <div class="board-frame">
+      <div class="corner tl"></div>
+      <div class="corner tr"></div>
+      <div class="corner bl"></div>
+      <div class="corner br"></div>
+      <div class="board-coords board-coords-top" id="coords-top" aria-hidden="true"></div>
+      <div class="board-coords board-coords-left" id="coords-left" aria-hidden="true"></div>
+      <div class="board-wrap">
+        <div id="board" class="board" role="grid" aria-label="Tabuleiro do Estreito de Ormuz"></div>
+      </div>
+    </div>
+
+    <aside class="ops-log" id="ops-log" aria-live="polite">
+      <div class="ops-log-header">
+        <span class="ops-log-dot"></span> TRANSMISSÕES DO COMANDO
+      </div>
+      <ul id="ops-log-list" class="ops-log-list"></ul>
+    </aside>
+  </main>
+
+  <!-- ============================================================
+       TELA INICIAL
+       ============================================================ -->
+  <section class="overlay overlay-start" id="screen-start">
+    <div class="overlay-bg" aria-hidden="true"></div>
+    <div class="overlay-content">
+      <div class="briefing-tag">CLASSIFICAÇÃO: SÁTIRA // EYES ONLY</div>
+
+      <h1 class="title">
+        <span class="title-line title-line-1">OPERAÇÃO</span>
+        <span class="title-line title-line-2">ESTREITO</span>
+        <span class="title-line title-line-3">MINADO</span>
+      </h1>
+
+      <p class="tagline">
+        Minas diplomáticas foram espalhadas pelo Estreito de Ormuz.
+        Um clique errado, e a <em>crise no Golfo</em> vira manchete global.
+        <br/>
+        <span class="tagline-small">— Briefing do Estado-Maior, sátira política em forma de campo minado.</span>
+      </p>
+
+      <div class="difficulty-grid">
+        <button class="diff-card" data-difficulty="easy" type="button">
+          <div class="diff-rank">NÍVEL 01</div>
+          <div class="diff-name">FÁCIL</div>
+          <div class="diff-desc">Tensão diplomática controlada.</div>
+          <div class="diff-stats">
+            <span>12×9</span>
+            <span>•</span>
+            <span>12 minas</span>
+          </div>
+        </button>
+
+        <button class="diff-card featured" data-difficulty="medium" type="button">
+          <div class="diff-rank">NÍVEL 02</div>
+          <div class="diff-name">MÉDIO</div>
+          <div class="diff-desc">Bloqueio naval em andamento.</div>
+          <div class="diff-stats">
+            <span>18×12</span>
+            <span>•</span>
+            <span>35 minas</span>
+          </div>
+        </button>
+
+        <button class="diff-card danger" data-difficulty="crisis" type="button">
+          <div class="diff-rank">NÍVEL 03</div>
+          <div class="diff-name">CRISE TOTAL</div>
+          <div class="diff-desc">Guerra à beira do colapso.</div>
+          <div class="diff-stats">
+            <span>24×16</span>
+            <span>•</span>
+            <span>80 minas</span>
+          </div>
+        </button>
+      </div>
+
+      <button id="btn-start" class="btn-launch" type="button" disabled>
+        <span class="btn-launch-label">SELECIONE UMA MISSÃO</span>
+        <span class="btn-launch-arrow">▶</span>
+      </button>
+
+      <div class="legend">
+        <div><kbd>CLIQUE</kbd> revelar zona</div>
+        <div><kbd>CLIQUE DIREITO</kbd> marcar suspeita</div>
+        <div><kbd>R</kbd> reiniciar</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       MODAL DE VITÓRIA
+       ============================================================ -->
+  <section class="overlay overlay-victory" id="screen-victory" hidden>
+    <div class="overlay-bg"></div>
+    <div class="overlay-content">
+      <div class="victory-stamp">MISSÃO CUMPRIDA</div>
+      <h2 class="victory-title">COMANDO NEUTRALIZADO</h2>
+      <p class="victory-desc">
+        Você atravessou o Estreito sem detonar uma única mina diplomática.
+        A imprensa internacional saudará seu sangue-frio.
+      </p>
+      <div class="victory-stats">
+        <div><span class="vs-label">SCORE FINAL</span><span class="vs-value" id="victory-score">0</span></div>
+        <div><span class="vs-label">TEMPO</span><span class="vs-value" id="victory-time">00:00</span></div>
+        <div><span class="vs-label">SEQUÊNCIA</span><span class="vs-value" id="victory-streak">0</span></div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-tactical big" id="btn-victory-replay" type="button">▶ NOVA OPERAÇÃO</button>
+        <button class="btn-tactical big ghost" id="btn-victory-menu" type="button">MENU</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       MODAL DE DERROTA — explosão com político
+       ============================================================ -->
+  <section class="overlay overlay-defeat" id="screen-defeat" hidden>
+    <div class="overlay-bg"></div>
+
+    <!-- Cena da explosão -->
+    <div class="boom-scene" id="boom-scene" aria-hidden="true">
+      <div class="boom-burst">
+        <svg viewBox="-100 -100 200 200" class="boom-burst-svg" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <radialGradient id="boomGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#fff5b0"/>
+              <stop offset="35%" stop-color="#ffb000"/>
+              <stop offset="70%" stop-color="#ff4d1a"/>
+              <stop offset="100%" stop-color="#7a1500" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <polygon points="0,-90 12,-30 60,-60 30,-12 90,0 30,12 60,60 12,30 0,90 -12,30 -60,60 -30,12 -90,0 -30,-12 -60,-60 -12,-30"
+                   fill="url(#boomGrad)"/>
+        </svg>
+      </div>
+      <div class="boom-portrait-wrap">
+        <img id="boom-portrait" class="boom-portrait" src="" alt="" />
+      </div>
+      <div class="boom-word" id="boom-word">BOOM!</div>
+    </div>
+
+    <div class="overlay-content defeat-content">
+      <div class="defeat-stamp">MISSÃO ABORTADA</div>
+      <h2 class="defeat-title" id="defeat-title">MINA DIPLOMÁTICA ATIVADA</h2>
+      <p class="defeat-desc" id="defeat-desc">
+        Um descuido no Estreito e o cenário geopolítico foi pelos ares. As manchetes amanhã serão impiedosas.
+      </p>
+      <div class="defeat-stats">
+        <div><span class="vs-label">ZONAS LIMPAS</span><span class="vs-value" id="defeat-revealed">0</span></div>
+        <div><span class="vs-label">SCORE</span><span class="vs-value" id="defeat-score">0</span></div>
+        <div><span class="vs-label">TEMPO</span><span class="vs-value" id="defeat-time">00:00</span></div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-tactical big" id="btn-defeat-replay" type="button">▶ TENTAR DE NOVO</button>
+        <button class="btn-tactical big ghost" id="btn-defeat-menu" type="button">MENU</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Aviso de sátira fixo no rodapé -->
+  <div class="satire-footer" aria-hidden="true">SÁTIRA / OBRA DE FICÇÃO • NÃO REPRESENTA EVENTOS REAIS</div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
